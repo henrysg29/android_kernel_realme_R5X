@@ -112,7 +112,19 @@ static void msm_actuator_parse_i2c_params(struct msm_actuator_ctrl_t *a_ctrl,
 	write_arr = a_ctrl->reg_tbl;
 	i2c_tbl = a_ctrl->i2c_reg_tbl;
 
+	#ifdef CONFIG_PRODUCT_REALME_TRINKET
+	if (i2c_tbl == NULL) {
+		pr_err("msm_actuator_parse_i2c_params i2c tab is null \n");
+		return;
+	}
+	#endif
+
 	for (i = 0; i < size; i++) {
+		/* check that the index into i2c_tbl cannot grow larger that
+		the allocated size of i2c_tbl */
+		if ((a_ctrl->total_steps + 1) < (a_ctrl->i2c_tbl_index)) {
+			break;
+		}
 		if (write_arr[i].reg_write_type == MSM_ACTUATOR_WRITE_DAC) {
 			value = (next_lens_position <<
 				write_arr[i].data_shift) |
@@ -843,7 +855,11 @@ static int32_t msm_actuator_park_lens(struct msm_actuator_ctrl_t *a_ctrl)
 	if (a_ctrl->park_lens.max_step > a_ctrl->max_code_size)
 		a_ctrl->park_lens.max_step = a_ctrl->max_code_size;
 
-	next_lens_pos = a_ctrl->step_position_table[a_ctrl->curr_step_pos];
+	#ifdef CONFIG_PRODUCT_REALME_TRINKET
+		next_lens_pos = 0;
+	#else
+		next_lens_pos = a_ctrl->step_position_table[a_ctrl->curr_step_pos];
+	#endif
 	while (next_lens_pos) {
 		/* conditions which help to reduce park lens time */
 		if (next_lens_pos > (a_ctrl->park_lens.max_step *
@@ -912,7 +928,10 @@ static int32_t msm_actuator_bivcm_init_step_table(
 	}
 
 	a_ctrl->max_code_size = max_code_size;
-	kfree(a_ctrl->step_position_table);
+	if ((a_ctrl->actuator_state == ACT_OPS_ACTIVE) &&
+		(a_ctrl->step_position_table != NULL)) {
+		kfree(a_ctrl->step_position_table);
+	}
 	a_ctrl->step_position_table = NULL;
 
 	if (set_info->af_tuning_params.total_steps
@@ -1475,21 +1494,29 @@ static int32_t msm_actuator_config(struct msm_actuator_ctrl_t *a_ctrl,
 		break;
 
 	case CFG_SET_DEFAULT_FOCUS:
-		if (a_ctrl->func_tbl &&
-			a_ctrl->func_tbl->actuator_set_default_focus)
-			rc = a_ctrl->func_tbl->actuator_set_default_focus(
-				a_ctrl, &cdata->cfg.move);
-		if (rc < 0)
-			pr_err("move focus failed %d\n", rc);
+		if (a_ctrl && a_ctrl->func_tbl) {
+			rc = a_ctrl->func_tbl->actuator_set_default_focus(a_ctrl,
+				&cdata->cfg.move);
+
+			if (rc < 0)
+				pr_err("move focus failed %d\n", rc);
+
+		} else
+			pr_err("%s:CFG_SET_DEFAULT_FOCUS failed!\n", __func__);
 		break;
 
 	case CFG_MOVE_FOCUS:
-		if (a_ctrl->func_tbl &&
-			a_ctrl->func_tbl->actuator_move_focus)
-			rc = a_ctrl->func_tbl->actuator_move_focus(a_ctrl,
-				&cdata->cfg.move);
-		if (rc < 0)
-			pr_err("move focus failed %d\n", rc);
+		if (a_ctrl && a_ctrl->func_tbl) {
+		rc = a_ctrl->func_tbl->actuator_move_focus(a_ctrl,
+			&cdata->cfg.move);
+
+			if (rc < 0)
+				pr_err("move focus failed %d\n", rc);
+
+		} else {
+			pr_err("%s:CFG_MOVE_FOCUS failed!\n", __func__);
+		}
+
 		break;
 	case CFG_ACTUATOR_POWERDOWN:
 		rc = msm_actuator_power_down(a_ctrl);
@@ -1498,10 +1525,12 @@ static int32_t msm_actuator_config(struct msm_actuator_ctrl_t *a_ctrl,
 		break;
 
 	case CFG_SET_POSITION:
-		if (a_ctrl->func_tbl &&
-			a_ctrl->func_tbl->actuator_set_position)
+		if (a_ctrl != NULL && a_ctrl->func_tbl != NULL)
 			rc = a_ctrl->func_tbl->actuator_set_position(a_ctrl,
 				&cdata->cfg.setpos);
+		else
+			rc = -EFAULT;
+
 		if (rc < 0)
 			pr_err("actuator_set_position failed %d\n", rc);
 		break;
