@@ -37,6 +37,10 @@
 #include <soc/oppo/boot_mode.h>
 #endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
+#ifdef CONFIG_KLAPSE
+#include "../sde/klapse.h"
+#endif
+
 /**
  * topology is currently defined by a set of following 3 values:
  * 1. num of layer mixers
@@ -696,6 +700,10 @@ static int dsi_panel_update_backlight(struct dsi_panel *panel,
 	pr_err("dsi_panel_update_backlight---lvl:%d\n", bl_lvl);
 
 	dsi = &panel->mipi_device;
+	
+#ifdef CONFIG_KLAPSE
+	set_rgb_slider(bl_lvl);
+#endif
 
 #ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/06/21, add NT36525B HOLITECH BOE LCD bringup code
