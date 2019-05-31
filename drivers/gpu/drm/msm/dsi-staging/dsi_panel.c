@@ -38,7 +38,7 @@
 #endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 #ifdef CONFIG_KLAPSE
-#include "../sde/klapse.h"
+#include <linux/klapse.h>
 #endif
 
 /**
