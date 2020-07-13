@@ -1066,7 +1066,7 @@ static int smb5_usb_set_prop(struct power_supply *psy,
 		smblib_set_prop_usb_voltage_max_limit(chg, val);
 		break;
 	default:
-		pr_err("set prop %d is not supported\n", psp);
+		pr_debug("set prop %d is not supported\n", psp);
 		rc = -EINVAL;
 		break;
 	}
@@ -1192,7 +1192,7 @@ static int smb5_usb_port_set_prop(struct power_supply *psy,
 
 	switch (psp) {
 	default:
-		pr_err_ratelimited("Set prop %d is not supported in pc_port\n",
+		pr_debug("Set prop %d is not supported in pc_port\n",
 				psp);
 		rc = -EINVAL;
 		break;
