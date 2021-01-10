@@ -155,7 +155,7 @@
 			};
 		};
 	};
-//#ifdef VENDOR_EDIT //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
+//#ifdef CONFIG_PRODUCT_REALME_TRINKET //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
 /*
 	skin-therm-adc {
 		polling-delay-passive = <0>;

@@ -219,7 +219,7 @@ source "drivers/input/misc/Kconfig"
 
 source "drivers/input/rmi4/Kconfig"
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 #Hongyu.lu@BSP.Fingerprint.Basic, 2018/04/25, Add for Fingerprint driver
 source "drivers/input/oppo_fp_drivers/Kconfig"
 #endif
@@ -234,7 +234,7 @@ source "drivers/input/gameport/Kconfig"
 
 endmenu
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 #Bin.Su@ODM_WT.BSP.Boardid,2019/05/07,Add device info for RM begain
 source "drivers/input/RM/Kconfig"
 #Bin.Su@ODM_WT.BSP.Boardid,2019/05/07,Add device info for RM end

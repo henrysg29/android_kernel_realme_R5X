@@ -34,7 +34,7 @@
 #include <linux/ion.h>
 #include <asm/cacheflush.h>
 #include <uapi/linux/sched/types.h>
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 /* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/01/22,
  * collect reserve vma use count
  */
@@ -4403,7 +4403,7 @@ static unsigned long _gpu_find_svm(struct kgsl_process_private *private,
 }
 
 /* Search top down in the CPU VM region for a free address */
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 /* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
  * get the unmap area from resrved area
  */
@@ -4418,7 +4418,7 @@ static unsigned long _cpu_get_unmapped_area(unsigned long bottom,
 	struct vm_unmapped_area_info info;
 	unsigned long addr, err;
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 	/* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
 	 * get the unmap area from resrved area
 	 */
@@ -4441,7 +4441,7 @@ static unsigned long _cpu_get_unmapped_area(unsigned long bottom,
 	return err ? err : addr;
 }
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 /* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
  * get unmaped area from normal or reserved vma, decide by mmap_flags
  */
@@ -4460,7 +4460,7 @@ static unsigned long _search_range(struct kgsl_process_private *private,
 
 	while (gpu > start) {
 		/* find a new empty spot on the CPU below the last one */
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 		/* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
 		 * use reserved area
 		 */
@@ -4514,7 +4514,7 @@ static unsigned long _search_range(struct kgsl_process_private *private,
 	return result;
 }
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 /* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
  * try to get unmap area from reserved area
  */
@@ -4640,7 +4640,7 @@ static unsigned long _get_svm_area(struct kgsl_process_private *private,
 
 		vma = find_vma(current->mm, addr);
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 		/* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
 		 * while vma is NULL, check whether the addr is valid in
 		 * reserve area or not.
@@ -4671,7 +4671,7 @@ static unsigned long _get_svm_area(struct kgsl_process_private *private,
 	 * Search downwards from the hint first. If that fails we
 	 * must try to search above it.
 	 */
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 	/* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
 	 * try to get unmap area from reserved area
 	 */

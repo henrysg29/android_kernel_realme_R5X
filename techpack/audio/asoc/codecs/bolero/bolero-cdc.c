@@ -913,7 +913,7 @@ static int bolero_probe(struct platform_device *pdev)
 	ret = of_property_read_u32(pdev->dev.of_node, "slew_rate_reg1",
 				   &slew_reg1);
 
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/06/13, Modify for wcd9370
 	ret |= of_property_read_u32(pdev->dev.of_node, "slew_rate_val1",
 				   &slew_val1);
@@ -943,7 +943,7 @@ static int bolero_probe(struct platform_device *pdev)
 		/* update slew rate for tx/rx swr interface */
 		iowrite32(slew_val2, slew_io_base2);
 	}
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDIT
 	INIT_WORK(&priv->bolero_add_child_devices_work,
 		  bolero_add_child_devices);
 	schedule_work(&priv->bolero_add_child_devices_work);

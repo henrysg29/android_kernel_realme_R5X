@@ -16,7 +16,7 @@
 #include "fg-alg.h"
 #include "qg-defs.h"
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for store SOC */
 enum batt_info_params {
 	BATT_INFO_NOTIFY = 0,
@@ -27,7 +27,7 @@ enum batt_info_params {
 	BATT_INFO_FCC,
 	BATT_INFO_MAX,
 };
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 struct qg_batt_props {
 	const char		*batt_type_str;
@@ -181,7 +181,7 @@ struct qpnp_qg {
 	struct cycle_counter	*counter;
 	/* ttf */
 	struct ttf		*ttf;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for store SOC */
 	/* Batt_info restore */
 	bool		soc_notify_ready;
@@ -191,7 +191,7 @@ struct qpnp_qg {
 	bool		batt_info_restore;
 	bool		batt_range_ocv;
 	int			batt_range_pct;
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 };
 
 struct ocv_all {
@@ -221,11 +221,11 @@ enum debug_mask {
 	QG_DEBUG_BUS_WRITE	= BIT(9),
 	QG_DEBUG_ALG_CL		= BIT(10),
 	QG_DEBUG_ESR		= BIT(11),
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for store SOC */
 	QG_DEBUG_RESTORE_SOC	= BIT(12),
 	QG_DEBUG_DUMP			= BIT(13),
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 };
 
 enum qg_irq {

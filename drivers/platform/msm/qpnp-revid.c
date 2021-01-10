@@ -131,10 +131,10 @@ EXPORT_SYMBOL(get_revid_data);
 #define PMD9655_PERIPHERAL_SUBTYPE	0x0F
 #define PMI8950_PERIPHERAL_SUBTYPE	0x11
 #define PMI8937_PERIPHERAL_SUBTYPE	0x37
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190530, Add for proc/devinfo */
 extern void devinfo_info_set(char *name, char *version, char *manufacture);
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 static size_t build_pmic_string(char *buf, size_t n, int sid,
 		u8 subtype, u8 rev1, u8 rev2, u8 rev3, u8 rev4)
 {
@@ -163,7 +163,7 @@ static size_t build_pmic_string(char *buf, size_t n, int sid,
 	if (rev1)
 		pos += snprintf(buf + pos, n - pos, ".%d", rev1);
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190530, Add for proc/devinfo */
 	if ((int)subtype == PM6125_SUBTYPE) {
 		devinfo_info_set("PMIC625", buf + 11, "Qualcomm");
@@ -172,7 +172,7 @@ static size_t build_pmic_string(char *buf, size_t n, int sid,
 		devinfo_info_set("PMIC632", buf + 11, "Qualcomm");
 		devinfo_info_set("gauge", buf + 11, "Qualcomm");
 	}
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 	return pos;
 }

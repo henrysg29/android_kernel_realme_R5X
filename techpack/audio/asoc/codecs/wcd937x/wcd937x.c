@@ -1652,7 +1652,7 @@ static int wcd937x_codec_enable_vdd_buck(struct snd_soc_dapm_widget *w,
 	return 0;
 }
 
-//ifdef ODM_WT_EDIT
+//ifdef CONFIG_ODM_WT_EDIT
 //Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for speaker
 #define AW_PA_MODE 1
 static int ext_spk_pa_enable(struct snd_soc_dapm_widget *w,
@@ -1687,7 +1687,7 @@ static int ext_spk_pa_enable(struct snd_soc_dapm_widget *w,
 	}
 	return 0;
 }
-//endif ODM_WT_EDIT
+//endif CONFIG_ODM_WT_EDIT
 
 static const char * const rx_hph_mode_mux_text[] = {
 	"CLS_H_INVALID", "CLS_H_HIFI", "CLS_H_LP", "CLS_AB", "CLS_H_LOHIFI",
@@ -1930,10 +1930,10 @@ static const struct snd_soc_dapm_widget wcd937x_dapm_widgets[] = {
 	SND_SOC_DAPM_OUTPUT("AUX"),
 	SND_SOC_DAPM_OUTPUT("HPHL"),
 	SND_SOC_DAPM_OUTPUT("HPHR"),
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for speaker
 	SND_SOC_DAPM_SPK("Ext PA", ext_spk_pa_enable),
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDIT
 };
 
 static const struct snd_soc_dapm_widget wcd9375_dapm_widgets[] = {
@@ -2045,10 +2045,10 @@ static const struct snd_soc_dapm_route wcd937x_audio_map[] = {
 	{"AUX_RDAC", "Switch", "RDAC4"},
 	{"AUX PGA", NULL, "AUX_RDAC"},
 	{"AUX", NULL, "AUX PGA"},
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for speaker
 	{"Ext PA", NULL, "AUX"},
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDIT
 
 
 	{"RDAC3_MUX", "RX3", "RX3"},
@@ -2257,10 +2257,10 @@ static int wcd937x_soc_codec_probe(struct snd_soc_codec *codec)
 	snd_soc_dapm_ignore_suspend(dapm, "AUX");
 	snd_soc_dapm_ignore_suspend(dapm, "HPHL");
 	snd_soc_dapm_ignore_suspend(dapm, "HPHR");
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for speaker
 	snd_soc_dapm_ignore_suspend(dapm, "Ext PA");
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDIT
 	snd_soc_dapm_sync(dapm);
 
 	wcd_cls_h_init(&wcd937x->clsh_info);
@@ -2557,14 +2557,14 @@ struct wcd937x_pdata *wcd937x_populate_dt_data(struct device *dev)
 	pdata->tx_slave = of_parse_phandle(dev->of_node, "qcom,tx-slave", 0);
 	wcd937x_dt_parse_micbias_info(dev, &pdata->micbias);
 
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for speaker
 	pdata->ext_pa_gpio = of_get_named_gpio(dev->of_node, "qcom,ext-pa-gpio", 0);
 	if (pdata->ext_pa_gpio > 0) {
 		if (gpio_request(pdata->ext_pa_gpio, "pa_gpio") < 0)
 			pr_err("%s ext_pa_gpio request failed!\n", __func__);
 	}
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDIT
 
 	return pdata;
 }

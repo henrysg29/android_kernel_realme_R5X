@@ -5183,10 +5183,10 @@ static void *def_wcd_mbhc_cal(void)
 		return NULL;
 
 #define S(X, Y) ((WCD_MBHC_CAL_PLUG_TYPE_PTR(wcd_mbhc_cal)->X) = (Y))
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for headset
 	S(v_hs_max, 1700);
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDIT
 #undef S
 #define S(X, Y) ((WCD_MBHC_CAL_BTN_DET_PTR(wcd_mbhc_cal)->X) = (Y))
 	S(num_btn, WCD_MBHC_DEF_BUTTONS);
@@ -5197,10 +5197,10 @@ static void *def_wcd_mbhc_cal(void)
 		(sizeof(btn_cfg->_v_btn_low[0]) * btn_cfg->num_btn);
 
 	btn_high[0] = 75;
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/06/20, Modify for headset
 	btn_high[1] = 130;
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDIT
 	btn_high[2] = 237;
 	btn_high[3] = 500;
 	btn_high[4] = 500;

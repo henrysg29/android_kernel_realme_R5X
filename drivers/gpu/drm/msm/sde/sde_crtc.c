@@ -41,7 +41,7 @@
 #include "sde_power_handle.h"
 #include "sde_core_perf.h"
 #include "sde_trace.h"
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Gou shengjun@PSW.MM.Display.Lcd.Stability, 2018-11-21
  * Add for drm notifier for display connect
 */

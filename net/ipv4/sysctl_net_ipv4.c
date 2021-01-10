@@ -810,7 +810,7 @@ static struct ctl_table ipv4_table[] = {
 		.extra2		= &tcp_use_userconfig_max,
 	},
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	//Mengqing.Zhao@PSW.CN.WiFi.Network.internet.1394484, 2019/04/02,
 	//add for: When find TCP SYN-ACK Timestamp value error, just do not use Timestamp
 	{
@@ -820,7 +820,7 @@ static struct ctl_table ipv4_table[] = {
 		.mode		= 0664,
 		.proc_handler	= proc_dointvec
 	},
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 	{ }
 };
 
@@ -1220,7 +1220,7 @@ static struct ctl_table ipv4_net_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec
 	},
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	//Hao.Peng@PSW.CN.WiFi.Network.login.1854960, 2019/03/30,
 	//add for [BUGID],disable tcp random timestamp,some networks limit tcp syn before login
 	{
@@ -1230,7 +1230,7 @@ static struct ctl_table ipv4_net_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec
 	},
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 	{ }
 };
 

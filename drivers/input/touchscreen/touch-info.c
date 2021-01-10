@@ -1244,7 +1244,7 @@ static struct touch_info_dev *find_default_tid(void)
 }
 
 #ifdef CONFIG_TOUCHSCREEN_PROC_INTERFACE
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.Tp,2018/10/11,Add touch-info file function
 #define TOUCH_PROC_DIR      "touchscreen_common"
 #else

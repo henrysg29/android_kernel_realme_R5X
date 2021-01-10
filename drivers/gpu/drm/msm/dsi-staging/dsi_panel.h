@@ -29,12 +29,12 @@
 #include "dsi_pwr.h"
 #include "dsi_parser.h"
 #include "msm_drv.h"
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Gou shengjun@PSW.MM.Display.LCD.Stability,2018/11/21
  * Add for save display panel power status at oppo display management
 */
 #include <linux/dsi_oppo_support.h>
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 #define MAX_BL_LEVEL 4096
 #define MAX_BL_SCALE_LEVEL 1024
@@ -115,12 +115,12 @@ struct dsi_backlight_config {
 	u32 bl_level;
 	u32 bl_scale;
 	u32 bl_scale_ad;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/05/04,Add blmap for BL
 	int blmap_size;
 	int *blmap;
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/05/04,Add blmap for BL
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 	int en_gpio;
 	/* PWM params */
@@ -203,20 +203,20 @@ struct dsi_panel {
 	struct dsi_parser_utils utils;
 
 	bool lp11_init;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/06/24, add NT36525B HOLITECH BOE LCD bringup code
 	bool novatek_flag;
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/06/24, add NT36525B HOLITECH BOE LCD bringup code
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 	bool ulps_feature_enabled;
 	bool ulps_suspend_enabled;
 	bool allow_phy_power_off;
 	atomic_t esd_recovery_pending;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/06/11, optimize lcd wakeup time
 	atomic_t esd_recovery_flag;
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/06/11, optimize lcd wakeup time
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 	bool panel_initialized;
 	bool te_using_watchdog_timer;
 	u32 qsync_min_fps;
@@ -225,7 +225,7 @@ struct dsi_panel {
 	enum dsi_dms_mode dms_mode;
 
 	bool sync_broadcast_en;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Gou shengjun@PSW.MM.Display.Service.Feature,2018/11/21
  * For OnScreenFingerprint feature
 */
@@ -338,7 +338,7 @@ struct dsi_panel *dsi_panel_ext_bridge_get(struct device *parent,
 int dsi_panel_parse_esd_reg_read_configs(struct dsi_panel *panel);
 
 void dsi_panel_ext_bridge_put(struct dsi_panel *panel);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Gou shengjun@PSW.MM.Display.LCD.Stability,2018/11/21
  * Add for oppo display new structure
 */

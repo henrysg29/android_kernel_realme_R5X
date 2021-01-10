@@ -568,7 +568,7 @@ static void wcd_mbhc_adc_detect_plug_type(struct wcd_mbhc *mbhc)
 static void wcd_micbias_disable(struct wcd_mbhc *mbhc)
 {
 	if (mbhc->micbias_enable) {
-		#ifndef VENDOR_EDIT
+		#ifndef CONFIG_PRODUCT_REALME_TRINKET
 		/* Zhaoan.Xu@Multimedia.AudioDriver.Stability, 2019/04/11, Modify for checklist 861440*/
 		mbhc->mbhc_cb->mbhc_micb_ctrl_thr_mic(
 			mbhc->codec, MIC_BIAS_2, false);
@@ -577,7 +577,7 @@ static void wcd_micbias_disable(struct wcd_mbhc *mbhc)
 			mbhc->mbhc_cb->mbhc_micb_ctrl_thr_mic(
 			    mbhc->codec, MIC_BIAS_2, false);
 		}
-		#endif /* VENDOR_EDIT */
+		#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 		if (mbhc->mbhc_cb->set_micbias_value)
 			mbhc->mbhc_cb->set_micbias_value(
 					mbhc->codec);
@@ -594,7 +594,7 @@ static int wcd_mbhc_get_plug_from_adc(struct wcd_mbhc *mbhc, int adc_result)
 	if (mbhc->hs_thr)
 		hs_thr = mbhc->hs_thr;
 	else
-	#ifndef VENDOR_EDIT
+	#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	/* JianQing.Liao@Mutimedia.AudioDriver.Driver, 2019/06/09, threshold error for 2.7V mbhc*/
 		hs_thr = WCD_MBHC_ADC_HS_THRESHOLD_MV;
 	#else
@@ -605,7 +605,7 @@ static int wcd_mbhc_get_plug_from_adc(struct wcd_mbhc *mbhc, int adc_result)
 	if (mbhc->hph_thr)
 		hph_thr = mbhc->hph_thr;
 	else
-	#ifndef VENDOR_EDIT
+	#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	/* JianQing.Liao@Mutimedia.AudioDriver.Driver, 2019/06/09, threshold error for 2.7V mbhc*/
 		hph_thr = WCD_MBHC_ADC_HPH_THRESHOLD_MV;
 	#else
@@ -631,7 +631,7 @@ static void wcd_correct_swch_plug(struct work_struct *work)
 	enum wcd_mbhc_plug_type plug_type = MBHC_PLUG_TYPE_INVALID;
 	unsigned long timeout;
 	bool wrk_complete = false;
-	#ifndef VENDOR_EDIT
+	#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	/*xiang.fei@PSW.MM.AudioDriver.HeadsetDet, 2017/03/03,
 	 *Delete for headset detect.
 	 */
@@ -639,7 +639,7 @@ static void wcd_correct_swch_plug(struct work_struct *work)
 	int no_gnd_mic_swap_cnt = 0;
 	#endif
 	bool is_pa_on = false, spl_hs = false, spl_hs_reported = false;
-	#ifndef VENDOR_EDIT
+	#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	/*xiang.fei@PSW.MM.AudioDriver.HeadsetDet, 2017/03/03,
 	 *Delete for headset detect.
 	 */
@@ -650,10 +650,10 @@ static void wcd_correct_swch_plug(struct work_struct *work)
 	int cross_conn;
 	int try = 0;
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	//Zhao.Pan@PSW.MM.AudioDriver.AudioDriver.HeadsetDet, 2019/01/28, Add for headset threshold compare
 	int hs_threshold;
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 
 	pr_debug("%s: enter\n", __func__);
 
@@ -688,7 +688,7 @@ static void wcd_correct_swch_plug(struct work_struct *work)
 	if ((plug_type == MBHC_PLUG_TYPE_HEADSET ||
 	     plug_type == MBHC_PLUG_TYPE_HEADPHONE) &&
 	    (!wcd_swch_level_remove(mbhc))
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 		&& (output_mv != 0)
 #endif
 		) {
@@ -740,7 +740,7 @@ correct_plug_type:
 		 */
 		plug_type = wcd_mbhc_get_plug_from_adc(mbhc, output_mv);
 
-		#ifdef VENDOR_EDIT
+		#ifdef CONFIG_PRODUCT_REALME_TRINKET
 		/* Zhao.Pan@PSW.MM.AudioDriver.AudioDriver.HeadsetDet,
 		 * 2019/01/28, Add for headset threshold compare */
 		if (mbhc->hs_thr) {
@@ -749,27 +749,27 @@ correct_plug_type:
 		    hs_threshold = ((WCD_MBHC_ADC_HS_THRESHOLD_MV *
 			    wcd_mbhc_get_micbias(mbhc)) / WCD_MBHC_ADC_MICBIAS_MV);
 		}
-		#endif /* VENDOR_EDIT */
+		#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 
-		#ifndef VENDOR_EDIT
+		#ifndef CONFIG_PRODUCT_REALME_TRINKET
 		/* Zhao.Pan@PSW.MM.AudioDriver.AudioDriver.HeadsetDet,
 		 * 2019/01/28, Add for headset threshold compare */
 		if ((output_mv > WCD_MBHC_ADC_HS_THRESHOLD_MV) &&
 		#else
 		if ((output_mv > hs_threshold) &&
-		#endif /* VENDOR_EDIT */
+		#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 		    (spl_hs_count < WCD_MBHC_SPL_HS_CNT)) {
 			spl_hs = wcd_mbhc_adc_check_for_spl_headset(mbhc,
 								&spl_hs_count);
 
 			if (spl_hs_count == WCD_MBHC_SPL_HS_CNT) {
-				#ifndef VENDOR_EDIT
+				#ifndef CONFIG_PRODUCT_REALME_TRINKET
 				/* Zhao.Pan@PSW.MM.AudioDriver.AudioDriver.HeadsetDet,
 				 * 2019/01/28, Add for headset threshold compare */
 				output_mv = WCD_MBHC_ADC_HS_THRESHOLD_MV;
 				#else
 				output_mv = hs_threshold;
-				#endif /* VENDOR_EDIT */
+				#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 				spl_hs = true;
 				mbhc->micbias_enable = true;
 			}
@@ -778,7 +778,7 @@ correct_plug_type:
 		if (mbhc->mbhc_cb->hph_pa_on_status)
 			is_pa_on = mbhc->mbhc_cb->hph_pa_on_status(mbhc->codec);
 
-		#ifndef VENDOR_EDIT
+		#ifndef CONFIG_PRODUCT_REALME_TRINKET
 		/*xiang.fei@PSW.MM.AudioDriver.HeadsetDet, 2017/03/03,
 		*Delete for headset detect.
 		*/
@@ -837,13 +837,13 @@ correct_plug_type:
 		}
 		#endif
 
-		#ifndef VENDOR_EDIT
+		#ifndef CONFIG_PRODUCT_REALME_TRINKET
 		/* Zhao.Pan@PSW.MM.AudioDriver.AudioDriver.HeadsetDet,
 		 * 2019/01/28, Add for headset threshold compare */
 		if (output_mv > WCD_MBHC_ADC_HS_THRESHOLD_MV) {
 		#else
 		if (output_mv > hs_threshold) {
-		#endif /* VENDOR_EDIT */
+		#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 			pr_debug("%s: cable is extension cable\n", __func__);
 			plug_type = MBHC_PLUG_TYPE_HIGH_HPH;
 			wrk_complete = true;

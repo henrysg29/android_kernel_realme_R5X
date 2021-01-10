@@ -287,7 +287,7 @@ struct media_entity {
 			u32 minor;
 		} dev;
 	} info;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	u32 revision;
 	u32 group_id;
 #endif

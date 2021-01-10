@@ -21,11 +21,11 @@
 #include <linux/proc_fs.h>
 #include <linux/uaccess.h>
 #include <linux/input/mt.h>
-#ifndef ODM_WT_EDIT
-#define ODM_WT_EDIT
+#ifndef CONFIG_ODM_WT_EDIT
+#define CONFIG_ODM_WT_EDIT
 #endif
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/11/20,solve novatek build error
 #include <linux/pm_wakeirq.h>
 #include <linux/pm_wakeup.h>
@@ -52,7 +52,7 @@
 #include <soc/oppo/device_info.h>
 
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/01/11, add tpd_summer
 //#include <linux/tpd_summer.h>
 //#include <linux/hardware_info.h>
@@ -93,7 +93,7 @@ unsigned int shutdown_nvt_flag = 0;//0:normal work; 1:TP shutdown
 
 static char version[20] = {"0"};
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 int	power_flag =  0; /* 0 disable ; 1 enable;no unblance*/
 #endif
@@ -102,7 +102,7 @@ int	power_flag =  0; /* 0 disable ; 1 enable;no unblance*/
 extern int32_t nvt_extra_proc_init(void);
 #endif
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04, add hardware_info
 //extern char Ctp_name[HARDWARE_MAX_ITEM_LONGTH];
 #endif
@@ -175,7 +175,7 @@ const struct mtk_chip_config spi_ctrdata = {
 };
 #endif
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/04,Add skyw novatek TP IC
 struct upgrade_fw_info nvt_fw_list[] = {
     {HLT, "hlt", BOOT_UPDATE_FIRMWARE_HLT_NAME,  MP_UPDATE_FIRMWARE_HLT_NAME, up_fw_kernel_hlt, sizeof(up_fw_kernel_hlt),  OPPO_BOOT_UPDATE_FIRMWARE_NAME_HLT},
@@ -304,7 +304,7 @@ void nvt_rest_ddi(void)
 	NVT_LOG("%s : Pull up reset_global_gpio",__func__);
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 /*******************************************************
 Description:
@@ -1071,7 +1071,7 @@ enum {	/* oppo gesture type */
 /* function page definition */
 #define FUNCPAGE_GESTURE         1
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/11/20,solve novatek build error
 //static struct wake_lock gestrue_wakelock;
 #else
@@ -1472,7 +1472,7 @@ static int32_t nvt_enable_jitter_mode(bool enable)
     return ret;
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/04/24,add HOPPING_POLLING
 int32_t nvt_enable_hopping_polling_mode(bool enable)
 {
@@ -1581,7 +1581,7 @@ static void nvt_esd_check_func(struct work_struct *work)
 		mutex_lock(&ts->lock);
 		NVT_ERR("do ESD recovery, timer = %d, retry = %d\n", timer, esd_retry);
 		/* do esd recovery, reload fw */
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/04,Add skyw novatek TP IC
 		nvt_update_firmware(fw->firmware_name);
 #endif
@@ -1770,7 +1770,7 @@ static void nvt_ts_work_func(void)
    /* ESD protect by WDT */
    if (nvt_wdt_fw_recovery(point_data)) {
        NVT_ERR("Recover for fw reset, %02X\n", point_data[1]);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/04,Add skyw novatek TP IC
        nvt_update_firmware(fw->firmware_name);
 #endif
@@ -1827,7 +1827,7 @@ static void nvt_ts_work_func(void)
 				if(frame ==0){
 					if(input_p_bak == input_p)
 					input_p++;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //bin.su@ODM_WT.BSP.Tp,2019/08/12,solver probleml for RTC 2224750
 					input_w++;
 #endif
@@ -1973,7 +1973,7 @@ static irqreturn_t nvt_ts_irq_handler(int32_t irq, void *dev_id)
 
 #if WAKEUP_GESTURE
 	if (bTouchIsAwake == 0) {
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/11/20,solve novatek build error
 		pm_wakeup_event(&ts->input_dev->dev, 5000);
 #else
@@ -2085,7 +2085,7 @@ static int __maybe_unused tid_get_lockdown_info(struct device *dev, char *out_va
 
 static void nvt_resume_workqueue(struct work_struct *work)
 {
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 	int pwr;
 #endif
@@ -2104,7 +2104,7 @@ static void nvt_resume_workqueue(struct work_struct *work)
 #if NVT_TOUCH_SUPPORT_HW_RST
 	gpio_set_value(ts->reset_gpio, 1);
 #endif
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/04,Add skyw novatek TP IC
 	nvt_update_firmware(fw->firmware_name);
 #endif
@@ -2114,7 +2114,7 @@ static void nvt_resume_workqueue(struct work_struct *work)
 	if (!ts->gesture_enable) {
 		//enable_irq(ts->client->irq);
 		nvt_irq_enable(1);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 		pwr = nvt_power_on(ts, true);
 		if(pwr != 0)
@@ -2126,7 +2126,7 @@ static void nvt_resume_workqueue(struct work_struct *work)
 	//enable_irq(ts->client->irq);
 	nvt_irq_enable(1);
 #endif
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 	if(power_flag == 0){
 		pwr = nvt_power_on(ts, true);
@@ -2172,7 +2172,7 @@ void nvt_lcd_esd_resume_func(void)
 
 	NVT_LOG("do ESD recovery, Begain to load firmware");
 	/* do esd recovery, reload fw */
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/04,Add skyw novatek TP IC
 	nvt_update_firmware(fw->firmware_name);
 #endif
@@ -2335,7 +2335,7 @@ return:
 static int32_t nvt_ts_probe(struct spi_device *client)
 {
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.Tp,2018/10/11,Add touch-info file function
 //	struct touch_info_dev *tid;
 //	struct touch_info_dev_operations *tid_ops;
@@ -2347,7 +2347,7 @@ static int32_t nvt_ts_probe(struct spi_device *client)
 	int32_t retry = 0;
 #endif
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.Tp.Init.1644722,2018/11/21,Bringup nt36525b+huaxian tp
 	char *temp = NULL;
 	char * cmdline_tp = NULL;
@@ -2394,7 +2394,7 @@ static int32_t nvt_ts_probe(struct spi_device *client)
 
 	ts->client = client;
 	spi_set_drvdata(client, ts);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.Tp,2018/11/21,Add touch-info file function
 /*	tid = devm_tid_and_ops_allocate(dev);
 	if (unlikely(!tid))
@@ -2464,7 +2464,7 @@ static int32_t nvt_ts_probe(struct spi_device *client)
 		goto err_gpio_config_failed;
 	}
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 	ret = power_init(ts, true);
 	if (ret) {
@@ -2566,7 +2566,7 @@ static int32_t nvt_ts_probe(struct spi_device *client)
 	ts->gesture_enable = 0;
 	memset(&ts->gesture, 0, sizeof(struct gesture_info));
 	input_set_capability(ts->input_dev, EV_KEY, KEY_F4);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/11/20,solve novatek build error
 	//device_init_wakeup(&ts->input_dev->dev, true);
 #else
@@ -2677,7 +2677,7 @@ static int32_t nvt_ts_probe(struct spi_device *client)
 	}
 #endif
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.Tp,2018/11/21,Add touch-info file function
 //	ret = devm_tid_register(dev, tid);
 //	if (unlikely(ret))
@@ -2782,7 +2782,7 @@ return:
 static int32_t nvt_ts_suspend(struct device *dev)
 {
 	//uint8_t buf[4] = {0};
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 	int pwr;
 #endif
@@ -2798,7 +2798,7 @@ static int32_t nvt_ts_suspend(struct device *dev)
 			/* Do nothing */
 		} else {
 			nvt_irq_enable(false);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2019/07/04,add power on function
 			pwr = nvt_power_on(ts, false);
 			if(pwr != 0) {
@@ -3016,7 +3016,7 @@ static void __exit nvt_driver_exit(void)
 		//destroy_workqueue(nvt_wq);
 
 #if BOOT_UPDATE_FIRMWARE
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/13, solve crash when boot errors
 	cancel_delayed_work_sync(&ts->nvt_fwu_work);
 #endif
@@ -3025,7 +3025,7 @@ static void __exit nvt_driver_exit(void)
 #endif
 
 #if NVT_TOUCH_ESD_PROTECT
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/13, solve crash when boot errors
 	cancel_delayed_work_sync(&nvt_esd_check_work);
 #endif

@@ -615,7 +615,7 @@ void wcd_mbhc_report_plug(struct wcd_mbhc *mbhc, int insertion,
 		hphlocp_off_report(mbhc, SND_JACK_OC_HPHL);
 		mbhc->current_plug = MBHC_PLUG_TYPE_NONE;
 		mbhc->force_linein = false;
-		#ifdef ODM_WT_EDIT
+		#ifdef CONFIG_ODM_WT_EDIT
 		headset_notifier_call_chain(0,NULL);
 		#endif
 	} else {
@@ -737,7 +737,7 @@ void wcd_mbhc_report_plug(struct wcd_mbhc *mbhc, int insertion,
 				    (mbhc->hph_status | SND_JACK_MECHANICAL),
 				    WCD_MBHC_JACK_MASK);
 		wcd_mbhc_clr_and_turnon_hph_padac(mbhc);
-		#ifdef ODM_WT_EDIT
+		#ifdef CONFIG_ODM_WT_EDIT
 		headset_notifier_call_chain(1,NULL);
 		#endif
 	}

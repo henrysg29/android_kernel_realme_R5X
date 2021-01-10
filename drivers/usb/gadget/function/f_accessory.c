@@ -302,7 +302,7 @@ static void acc_complete_set_string(struct usb_ep *ep, struct usb_request *req)
 	struct acc_dev	*dev = ep->driver_data;
 	char *string_dest = NULL;
 	int length = req->actual;
-#ifdef VENDOR_EDIT  /* zhangkun@BSP.CHG.Basic, 2019/04/24, Add for cannot connect DJI*/
+#ifdef CONFIG_PRODUCT_REALME_TRINKET  /* zhangkun@BSP.CHG.Basic, 2019/04/24, Add for cannot connect DJI*/
 	unsigned long flags;
 #endif
 
@@ -330,7 +330,7 @@ static void acc_complete_set_string(struct usb_ep *ep, struct usb_request *req)
 	case ACCESSORY_STRING_SERIAL:
 		string_dest = dev->serial;
 		break;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* tongfeng.Huang@BSP.CHG.Basic, 2018/11/17,  Add for dump issue */
 	default:
 		pr_err("unknown accessory string index %d\n",
@@ -339,7 +339,7 @@ static void acc_complete_set_string(struct usb_ep *ep, struct usb_request *req)
 #endif
 	}
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* tongfeng.Huang@BSP.CHG.Basic, 2018/11/17,  Add for dump issue */
 	if (!length) {
 		pr_debug("zero length for accessory string index %d\n",
@@ -867,7 +867,7 @@ int acc_ctrlrequest(struct usb_composite_dev *cdev,
 	u16	w_length = le16_to_cpu(ctrl->wLength);
 	unsigned long flags;
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* tongfeng.Huang@BSP.CHG.Basic, 2018/11/17,  Add for dump issue */
 	if (!dev)
 		return -ENODEV;

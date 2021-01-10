@@ -1,6 +1,6 @@
 /***************************************************************
 ** Copyright (C),  2018,  OPPO Mobile Comm Corp.,  Ltd
-** VENDOR_EDIT
+** CONFIG_PRODUCT_REALME_TRINKET
 ** File : oppo_display_private_api.h
 ** Description : oppo display private api implement
 ** Version : 1.0
@@ -927,7 +927,7 @@ static ssize_t oppo_display_notify_panel_blank(struct device *dev,
 		blank = MSM_DRM_BLANK_UNBLANK;
 		notifier_data.data = &blank;
 		notifier_data.id = 0;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/06/26, add LCD log for debug
                         pr_info("LCD_LOG before MSM_DRM_EARLY_EVENT_BLANK func:%s\n",__func__);		
                 msm_drm_notifier_call_chain(MSM_DRM_EARLY_EVENT_BLANK,
@@ -937,19 +937,19 @@ static ssize_t oppo_display_notify_panel_blank(struct device *dev,
 						   &notifier_data);
                         pr_info("LCD_LOG after MSM_DRM_EVENT_BLANK func:%s\n",__func__);		
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/06/26, add LCD log for debug
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 	} else if (temp_save == 0) {
 		blank = MSM_DRM_BLANK_POWERDOWN;
 		notifier_data.data = &blank;
 		notifier_data.id = 0;
-		#ifdef ODM_WT_EDIT
+		#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/06/26, add LCD log for debug
                         pr_info("LCD_LOG 222 before MSM_DRM_EARLY_EVENT_BLANK func:%s\n",__func__);		
 		msm_drm_notifier_call_chain(MSM_DRM_EARLY_EVENT_BLANK,
 						   &notifier_data);
 						 pr_info("LCD_LOG 222 after MSM_DRM_EARLY_EVENT_BLANK func:%s\n",__func__);	
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/06/26, add LCD log for debug
-#endif /* ODM_WT_EDIT */						   
+#endif /* CONFIG_ODM_WT_EDIT */						   
 	}
 	return count;
 }

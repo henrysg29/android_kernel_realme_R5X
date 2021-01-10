@@ -15,7 +15,7 @@
 #include <linux/wait.h>
 #include <linux/stringify.h>
 #include <linux/power_supply.h>
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 #include <linux/headset_notifier.h>
 #endif
 #include "wcdcal-hwdep.h"

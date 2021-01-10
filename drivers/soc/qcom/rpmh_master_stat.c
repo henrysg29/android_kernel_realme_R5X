@@ -95,22 +95,22 @@ struct msm_rpmh_profile_unit {
 struct rpmh_master_stats_prv_data {
 	struct kobj_attribute ka;
 	struct kobject *kobj;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Ji.Xu@BSP.Power.Basic, 2019/04/01, add for get rpm_stats
 	struct kobj_attribute oppoka;
 	struct kobject *oppokobj;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 };
 
 static struct msm_rpmh_master_stats apss_master_stats;
 static void __iomem *rpmh_unit_base;
 
 static DEFINE_MUTEX(rpmh_stats_mutex);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Ji.Xu@BSP.Power.Basic, 2019/04/01, add for get rpm_stats
 static DEFINE_MUTEX(oppo_rpmh_stats_mutex);
-#endif /*VENDOR_EDIT*/
-#ifdef VENDOR_EDIT
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Ji.Xu@BSP.Power.Basic, 2019/04/01, add for get rpm_stats
 #define MSM_ARCH_TIMER_FREQ 19200000
 static inline u64 get_time_in_msec(u64 counter)
@@ -119,7 +119,7 @@ static inline u64 get_time_in_msec(u64 counter)
 	counter *= MSEC_PER_SEC;
 	return counter;
 }
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 
 static ssize_t msm_rpmh_master_stats_print_data(char *prvbuf, ssize_t length,
 				struct msm_rpmh_master_stats *record,
@@ -147,7 +147,7 @@ static ssize_t msm_rpmh_master_stats_print_data(char *prvbuf, ssize_t length,
 			accumulated_duration);
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Ji.Xu@BSP.Power.Basic, 2019/04/01, add for get rpm_stats
 static ssize_t oppo_rpmh_master_stats_print_data(char *prvbuf, ssize_t length,
 				struct msm_rpmh_master_stats *record,
@@ -158,7 +158,7 @@ static ssize_t oppo_rpmh_master_stats_print_data(char *prvbuf, ssize_t length,
 			get_time_in_msec(record->accumulated_duration));
 }
 
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 static ssize_t msm_rpmh_master_stats_show(struct kobject *kobj,
 				struct kobj_attribute *attr, char *buf)
 {
@@ -192,7 +192,7 @@ static ssize_t msm_rpmh_master_stats_show(struct kobject *kobj,
 	return length;
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Ji.Xu@BSP.Power.Basic, 2019/04/01, add for get rpm_stats
 static ssize_t oppo_rpmh_master_stats_show(struct kobject *kobj,
 				struct kobj_attribute *attr, char *buf)
@@ -224,7 +224,7 @@ static ssize_t oppo_rpmh_master_stats_show(struct kobject *kobj,
 	return length;
 }
 
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 static inline void msm_rpmh_apss_master_stats_update(
 				struct msm_rpmh_profile_unit *profile_unit)
@@ -308,7 +308,7 @@ static int msm_rpmh_master_stats_probe(struct platform_device *pdev)
 		goto fail_iomap;
 	}
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Ji.Xu@BSP.Power.Basic, 2019/04/01, add for get rpm_stats
 	prvdata->oppokobj = rpmh_master_stats_kobj;
 
@@ -325,7 +325,7 @@ static int msm_rpmh_master_stats_probe(struct platform_device *pdev)
 		kobject_put(prvdata->oppokobj);
 		return ret;
 	}
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 	apss_master_stats.version_id = 0x1;
 	platform_set_drvdata(pdev, prvdata);
@@ -350,11 +350,11 @@ static int msm_rpmh_master_stats_remove(struct platform_device *pdev)
 
 	sysfs_remove_file(prvdata->kobj, &prvdata->ka.attr);
 	kobject_put(prvdata->kobj);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Ji.Xu@BSP.Power.Basic, 2019/04/01, add for get rpm_stats
 	sysfs_remove_file(prvdata->oppokobj, &prvdata->oppoka.attr);
 	kobject_put(prvdata->oppokobj);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 	platform_set_drvdata(pdev, NULL);
 	iounmap(rpmh_unit_base);
 	rpmh_unit_base = NULL;

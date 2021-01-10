@@ -84,7 +84,7 @@ static void vote_set_any(struct votable *votable, int client_id,
 	*eff_id = client_id;
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190516, Add for get any voter value without one client */
 bool get_any_voter_value_without_client(struct votable *votable, const char *client_str)
 {
@@ -99,7 +99,7 @@ bool get_any_voter_value_without_client(struct votable *votable, const char *cli
 
 	return eff_res;
 }
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 /**
  * vote_min() -
  * @votable:	votable object
@@ -435,18 +435,18 @@ int vote(struct votable *votable, const char *client_str, bool enabled, int val)
 			|| (effective_result != votable->effective_result)) {
 		votable->effective_client_id = effective_id;
 		votable->effective_result = effective_result;
-	#if !defined(ODM_WT_EDIT) || defined(WT_FINAL_RELEASE)
+	#if !defined(CONFIG_ODM_WT_EDIT) || defined(WT_FINAL_RELEASE)
 	/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add lcd on-off control usb icl */
 		pr_debug("%s: effective vote is now %d voted by %s,%d\n",
 			votable->name, effective_result,
 			get_client_str(votable, effective_id),
 			effective_id);
-	#else /* ODM_WT_EDIT */
+	#else /* CONFIG_ODM_WT_EDIT */
 		pr_info("%s: effective vote is now %d voted by %s,%d\n",
 			votable->name, effective_result,
 			get_client_str(votable, effective_id),
 			effective_id);
-	#endif /* ODM_WT_EDIT */
+	#endif /* CONFIG_ODM_WT_EDIT */
 		if (votable->callback && !votable->force_active)
 			rc = votable->callback(votable, votable->data,
 					effective_result,

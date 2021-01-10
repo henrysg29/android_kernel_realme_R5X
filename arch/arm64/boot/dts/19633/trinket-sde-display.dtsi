@@ -16,21 +16,21 @@
 #include "dsi-panel-hx83112a-truly-singlemipi-fhd-video.dtsi"
 #include <dt-bindings/clock/mdss-14nm-pll-clk.h>
 #include <dt-bindings/clock/mdss-14nm-pll-clk.h>
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/04/6, Add for LCD bring up
 #include "dsi-panel-ili9881h-truly-singlemipi-hdp-video.dtsi"
 #include "dsi-panel-hx83102d-auo-singlemipi-hdp-video.dtsi"
 #include "dsi-panel-ili9881h-truly-auo-singlemipi-hdp-video.dtsi"
 #include "dsi-panel-ili9881h-innolux-inx-singlemipi-hdp-video.dtsi"
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/04/6, Add for LCD bring up
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 
 &soc {
 	dsi_panel_pwr_supply: dsi_panel_pwr_supply {
 		#address-cells = <1>;
 		#size-cells = <0>;
 
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/04/6, Add for LCD bring up
 		qcom,panel-supply-entry@0 {
 			reg = <0>;
@@ -64,7 +64,7 @@
 			qcom,supply-pre-off-sleep = <2>;
 		};
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/04/6, Add for LCD bring up
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 	};
 
 	dsi_panel_pwr_supply_no_labibb: dsi_panel_pwr_supply_no_labibb {
@@ -152,7 +152,7 @@
 		qcom,dsi-panel = <&dsi_hx83112a_truly_video>;
 	};
 
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/04/6, Add for LCD bring up
         dsi_ili9881h_truly_video_display: qcom,dsi-display@4 {
 		label = "dsi_ili9881h_truly_video_display";
@@ -198,7 +198,7 @@
 		qcom,dsi-panel = <&dsi_ili9881h_innolux_inx_video>;
 	};
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/04/6, Add for LCD bring up
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 
 	sde_dsi: qcom,dsi-display {
 		compatible = "qcom,dsi-display";
@@ -225,7 +225,7 @@
 		lab-supply = <&lcdb_ldo_vreg>;
 		ibb-supply = <&lcdb_ncp_vreg>;
 
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/04/6, Add for LCD bring up
 		qcom,dsi-display-list =
 			<&dsi_td4330_truly_vid_display
@@ -237,7 +237,7 @@
 			&dsi_ili9881h_truly_auo_video_display
 			&dsi_ili9881h_innolux_inx_video_display>;
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/04/6, Add for LCD bring up
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 	};
 
 	sde_wb: qcom,wb-display@0 {
@@ -362,7 +362,7 @@
 	};
 };
 
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/04/6, Add for LCD bring up
 &dsi_ili9881h_truly_video {
 	qcom,mdss-dsi-t-clk-post = <0x0c>;
@@ -436,4 +436,4 @@
 	};
 };
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/04/6, Add for LCD bring up
-//#endif /* ODM_WT_EDIT :*/
+//#endif /* CONFIG_ODM_WT_EDIT :*/

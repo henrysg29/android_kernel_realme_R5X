@@ -191,7 +191,7 @@
 			#cooling-cells = <2>;
 
 			qcom,pmic-revid = <&pmi632_revid>;
-		//ifndef ODM_WT_EDIT
+		//ifndef CONFIG_ODM_WT_EDIT
 		//	io-channels = <&pmi632_vadc ADC_USB_IN_V_16>,
 		//		      <&pmi632_vadc ADC_USB_IN_I>,
 		//		      <&pmi632_vadc ADC_CHG_TEMP>,
@@ -200,7 +200,7 @@
 		//			   "usb_in_current",
 		//			   "chg_temp",
 		//			   "die_temp";
-		//#else /* ODM_WT_EDIT */
+		//#else /* CONFIG_ODM_WT_EDIT */
 			/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190505, Modify for skin/cpu therm */
 			io-channels = <&pmi632_vadc ADC_USB_IN_V_16>,
 				      <&pmi632_vadc ADC_USB_IN_I>,
@@ -214,14 +214,14 @@
 					   "die_temp",
 					   "skin_temp",
 					   "cpu_temp";
-		//#endif /* ODM_WT_EDIT */
-			//#ifdef ODM_WT_EDIT
+		//#endif /* CONFIG_ODM_WT_EDIT */
+			//#ifdef CONFIG_ODM_WT_EDIT
 			//Haibin1.Zhang@ODM_WT.BSP.Storage.otg, 2019/04/18, Add for otg configuration
 			pinctrl-names = "usbid_default","usbid_sleep";
 			pinctrl-0 = <&usbid_default>;
 			pinctrl-1 = <&usbid_sleep>;
 			qcom,usbid-gpio = <&tlmm 47 0>;
-			//#endif /* ODM_WT_EDIT */
+			//#endif /* CONFIG_ODM_WT_EDIT */
 			qcom,chgr@1000 {
 				reg = <0x1000 0x100>;
 				interrupts =
@@ -375,18 +375,18 @@
 			#size-cells = <1>;
 
 			qcom,pmic-revid = <&pmi632_revid>;
-			//#ifndef ODM_WT_EDIT
+			//#ifndef CONFIG_ODM_WT_EDIT
 			//Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190404, Modify for battery temperature scale function
 			//io-channels = <&pmi632_vadc ADC_BAT_THERM_PU2>,
 			//	      <&pmi632_vadc ADC_BAT_ID_PU2>;
 			//io-channel-names = "batt-therm",
 			//		   "batt-id";
-			//#else /* ODM_WT_EDIT */
+			//#else /* CONFIG_ODM_WT_EDIT */
 			io-channels = <&pmi632_vadc ADC_BAT_THERM_PU1>,
 				      <&pmi632_vadc ADC_BAT_ID_PU2>;
 			io-channel-names = "batt-therm",
 					   "batt-id";
-			//#endif /* ODM_WT_EDIT */
+			//#endif /* CONFIG_ODM_WT_EDIT */
 
 			qcom,qgauge@4800 {
 				status = "okay";
@@ -525,11 +525,11 @@
 			interrupt-names = "sc-irq";
 
 			qcom,pmic-revid = <&pmi632_revid>;
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/05/17, Adjust lcd power on/off sequence
 			//qcom,voltage-step-ramp;
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/05/17, Adjust lcd power on/off sequence
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 
 			lcdb_ldo_vreg: ldo {
 				label = "ldo";
@@ -604,11 +604,11 @@
 				qcom,max-current = <500>;
 				qcom,default-led-trigger = "torch0_trigger";
 				qcom,id = <0>;
-				/*ifdef  ODM_WT_EDIT*/
+				/*ifdef  CONFIG_ODM_WT_EDIT*/
 				qcom,current-ma = <140>;
 				/*else
 				qcom,current-ma = <300>;
-				endif ODM_WT_EDIT
+				endif CONFIG_ODM_WT_EDIT
 				*/
 				qcom,ires-ua = <12500>;
 				qcom,hdrm-voltage-mv = <400>;

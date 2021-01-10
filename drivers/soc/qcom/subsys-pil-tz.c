@@ -20,7 +20,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/interrupt.h>
 #include <linux/delay.h>
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #include <wt_sys/wt_boot_reason.h>
 #endif
@@ -804,7 +804,7 @@ static struct pil_reset_ops pil_ops_trusted = {
 };
 
 #define subsys_to_drv(d) container_of(d, struct modem_data, subsys_desc)
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 char subsys_restart_reason[WT_MAX_SSR_REASON_LEN];
@@ -832,7 +832,7 @@ static void log_failure_reason(const struct pil_tz_data *d)
 
 	strlcpy(reason, smem_reason, min(size, (size_t)MAX_SSR_REASON_LEN));
 	pr_err("%s subsystem failure reason: %s.\n", name, reason);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 	strlcpy(subsys_restart_reason, smem_reason, min(size, (size_t)WT_MAX_SSR_REASON_LEN));

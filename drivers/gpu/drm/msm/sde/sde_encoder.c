@@ -2184,7 +2184,7 @@ static void sde_encoder_input_event_handler(struct input_handle *handle,
 
 	priv = drm_enc->dev->dev_private;
 	sde_enc = to_sde_encoder_virt(drm_enc);
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	if (!sde_enc->crtc || (sde_enc->crtc->index
 			>= ARRAY_SIZE(priv->disp_thread))) {
 		SDE_DEBUG_ENC(sde_enc,
@@ -2197,7 +2197,7 @@ static void sde_encoder_input_event_handler(struct input_handle *handle,
 	SDE_EVT32_VERBOSE(DRMID(drm_enc));
 
 	disp_thread = &priv->disp_thread[sde_enc->crtc->index];
-#else /* VENDOR_EDIT */
+#else /* CONFIG_PRODUCT_REALME_TRINKET */
 /* Gou shengjun@PSW.MM.Display.LCD.Stable,2018-11-21
  * fix sde_enc->crtc race
  */
@@ -2217,7 +2217,7 @@ static void sde_encoder_input_event_handler(struct input_handle *handle,
 
 		disp_thread = &priv->disp_thread[crtc->index];
 	}
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 
 	kthread_queue_work(&disp_thread->worker,
 				&sde_enc->input_event_work);
@@ -2606,7 +2606,7 @@ static int sde_encoder_resource_control(struct drm_encoder *drm_enc,
 		mutex_unlock(&sde_enc->rc_lock);
 		break;
 	case SDE_ENC_RC_EVENT_EARLY_WAKEUP:
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_PRODUCT_REALME_TRINKET
 		if (!sde_enc->crtc ||
 			sde_enc->crtc->index >= ARRAY_SIZE(priv->disp_thread)) {
 			SDE_DEBUG_ENC(sde_enc,
@@ -2636,7 +2636,7 @@ static int sde_encoder_resource_control(struct drm_encoder *drm_enc,
 
 			disp_thread = &priv->disp_thread[crtc->index];
 		}
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 
 		mutex_lock(&sde_enc->rc_lock);
 

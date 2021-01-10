@@ -3762,7 +3762,7 @@ static int msm_isp_request_frame(struct vfe_device *vfe_dev,
 		pr_debug("%s:%d invalid time to request frame %d try drop_reconfig\n",
 			__func__, __LINE__, frame_id);
 		vfe_dev->isp_page->drop_reconfig = 1;
-#ifdef VENDOR_EDIT /* Camera@Drv 2019/07/22, Add for frame remap support on frame drop */
+#ifdef CONFIG_PRODUCT_REALME_TRINKET /* Camera@Drv 2019/07/22, Add for frame remap support on frame drop */
 		return 0;
 #endif
 	} else if ((vfe_dev->axi_data.src_info[frame_src].active) &&
@@ -3776,7 +3776,7 @@ static int msm_isp_request_frame(struct vfe_device *vfe_dev,
 			__func__, vfe_dev->pdev->id, frame_id,
 			vfe_dev->axi_data.src_info[VFE_PIX_0].frame_id,
 			vfe_dev->axi_data.src_info[VFE_PIX_0].active);
-#ifdef VENDOR_EDIT /* Camera@Drv 2019/07/22, Add for frame remap support on frame drop */
+#ifdef CONFIG_PRODUCT_REALME_TRINKET /* Camera@Drv 2019/07/22, Add for frame remap support on frame drop */
 		return 0;
 #endif
 	} else if ((vfe_dev->axi_data.src_info[frame_src].active && (frame_id !=

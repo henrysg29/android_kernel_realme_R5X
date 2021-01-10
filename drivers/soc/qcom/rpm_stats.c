@@ -24,10 +24,10 @@
 #include <asm/arch_timer.h>
 
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 // Wenxian.Zhen@PSW.BSP.Power.Basic,, 2018/05/19, add for analysis power consumption
 #include <linux/debugfs.h>
-#endif //VENDOR_EDIT
+#endif //CONFIG_PRODUCT_REALME_TRINKET
 
 #define RPM_STATS_NUM_REC	2
 #define MSM_ARCH_TIMER_FREQ	19200000
@@ -35,10 +35,10 @@
 #define GET_PDATA_OF_ATTR(attr) \
 	(container_of(attr, struct msm_rpmstats_kobj_attr, ka)->pd)
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 // Wenxian.Zhen@PSW.BSP.Power.Basic,, 2018/05/19, add for analysis power consumption
 static DEFINE_MUTEX(rpm_stats_mutex);
-#endif //VENDOR_EDIT
+#endif //CONFIG_PRODUCT_REALME_TRINKET
 
 struct msm_rpmstats_record {
 	char name[32];
@@ -74,7 +74,7 @@ struct msm_rpm_stats_data {
 
 };
 //yangmingjin@BSP.POWER.Basic 2019/05/27 add for RM_TAG_POWER_DEBUG
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 static struct msm_rpmstats_private_data *gPrvdata;
 static bool init_flag = true;
 static bool force_format = false;
@@ -88,7 +88,7 @@ struct mt_rpmstats_cnt_data {
 static struct mt_rpmstats_cnt_data rpmstats_cnt_data;
 #define RPMSTATS_OVER_CNT_THRES 20
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 
 struct msm_rpmstats_kobj_attr {
 	struct kobject *kobj;
@@ -120,11 +120,11 @@ static inline int msm_rpmstats_append_data_to_buf(char *buf,
 	u64 time_since_last_mode;
 	u64 actual_last_sleep;
 //yangmingjin@BSP.POWER.Basic 2019/05/27 add for RM_TAG_POWER_DEBUG
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	u32 pre_count;
 	u32 same_times;
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 	stat_type[4] = 0;
 	memcpy(stat_type, &data->stat_type, sizeof(u32));
 
@@ -134,7 +134,7 @@ static inline int msm_rpmstats_append_data_to_buf(char *buf,
 	time_since_last_mode = get_time_in_sec(time_since_last_mode);
 	actual_last_sleep = get_time_in_msec(data->accumulated);
 //yangmingjin@BSP.POWER.Basic 2019/05/27 add for RM_TAG_POWER_DEBUG
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	if(!strcmp(stat_type, rpmstats_cnt_data.xo_stat_type)){
 		if(rpmstats_cnt_data.pre_xo_count == data->count)
 			rpmstats_cnt_data.xo_same_times++;
@@ -165,7 +165,7 @@ static inline int msm_rpmstats_append_data_to_buf(char *buf,
 #endif
 	else
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 
 #if defined(CONFIG_MSM_RPM_SMD)
 	return snprintf(buf, buflength,
@@ -240,7 +240,7 @@ static inline int msm_rpmstats_copy_stats(
 	return length;
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 // Wenxian.Zhen@PSW.BSP.Power.Basic,, 2018/05/19, add for analysis power consumption
 static inline int oppo_rpmstats_append_data_to_buf(char *buf,
 		struct msm_rpm_stats_data *data, int buflength)
@@ -385,7 +385,7 @@ static const struct file_operations oppo_rpmstats_fops = {
 	.release  = msm_rpmstats_file_close,
 	.llseek   = no_llseek,
 };
-#endif //VENDOR_EDIT
+#endif //CONFIG_PRODUCT_REALME_TRINKET
 static ssize_t rpmstats_show(struct kobject *kobj,
 			struct kobj_attribute *attr, char *buf)
 {
@@ -453,7 +453,7 @@ fail:
 }
 
 //yangmingjin@BSP.POWER.Basic 2019/05/27 add for RM_TAG_POWER_DEBUG
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 static bool is_over_xo_thres(void){
 	return rpmstats_cnt_data.xo_same_times > RPMSTATS_OVER_CNT_THRES;
 }
@@ -516,14 +516,14 @@ void rpmstats_print(bool suspend){
 	force_format = false;
 }
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 
 static int msm_rpmstats_probe(struct platform_device *pdev)
 {
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 // Wenxian.Zhen@PSW.BSP.Power.Basic,, 2018/05/19, add for analysis power consumption
     struct dentry *dent = NULL;
-#endif //VENDOR_EDIT
+#endif //CONFIG_PRODUCT_REALME_TRINKET
 	struct msm_rpmstats_platform_data *pdata;
 	struct resource *res = NULL, *offset = NULL;
 	u32 offset_addr = 0;
@@ -559,7 +559,7 @@ static int msm_rpmstats_probe(struct platform_device *pdev)
 	if (of_property_read_u32(pdev->dev.of_node, key, &pdata->num_records))
 		pdata->num_records = RPM_STATS_NUM_REC;
 		
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 // Wenxian.Zhen@PSW.BSP.Power.Basic,, 2018/05/19, add for analysis power consumption
 		dent = debugfs_create_file("oppo_rpm_stats", S_IRUGO, NULL,
 				pdata, &oppo_rpmstats_fops);
@@ -571,16 +571,16 @@ static int msm_rpmstats_probe(struct platform_device *pdev)
 			return -ENOMEM;
 		}
 
-#endif //VENDOR_EDIT
+#endif //CONFIG_PRODUCT_REALME_TRINKET
 	msm_rpmstats_create_sysfs(pdev, pdata);
 
 //yangmingjin@BSP.POWER.Basic 2019/05/27 add for RM_TAG_POWER_DEBUG
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
         if(private_data_init(&pdev->dev, &gPrvdata, pdata))
             init_flag = false;
 	strcpy(rpmstats_cnt_data.xo_stat_type, "vlow");
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 	return 0;
 }
 

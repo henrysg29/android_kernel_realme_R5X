@@ -1,6 +1,6 @@
 /*******************************************************************************
  *  Copyright (C), 2008-2018, OPPO Mobile Comm Corp., Ltd.
- *  ODM_WT_EDIT
+ *  CONFIG_ODM_WT_EDIT
  *  FILE: - wt_charger_log.c
  *  Description : Add charger log
  *  Version: 1.0
@@ -15,7 +15,7 @@
  * V0.1 zhangbin2 20170817 add charger & battery log
  * V1.0 zhangbin2 20171027 Correct g_smbchg_chip to g_smbchg_chg, modify with power_supply.h
 **********************************************************************************************/
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 #ifdef __WT_BATTERY_CHARGER_LOG_OUTPUT__
 
 //#define DEBUG
@@ -209,7 +209,7 @@ static char *power_supply_name[] = {
 	POWER_SUPPLY_NAME(connector_health),
 	POWER_SUPPLY_NAME(ctm_current_max),
 	POWER_SUPPLY_NAME(hw_current_max),
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for charging sysfs. */
 	POWER_SUPPLY_NAME(StopCharging_Test),
 	POWER_SUPPLY_NAME(StartCharging_Test),
@@ -233,12 +233,12 @@ static char *power_supply_name[] = {
 	POWER_SUPPLY_NAME(ui_soc),
 	POWER_SUPPLY_NAME(real_status),
 	POWER_SUPPLY_NAME(recharge_uv),
-#endif /* ODM_WT_EDIT */
-	#ifdef ODM_WT_EDIT
+#endif /* CONFIG_ODM_WT_EDIT */
+	#ifdef CONFIG_ODM_WT_EDIT
 	/*Haibin1.zhang@ODM_WT.BSP.Storage.otg, 2019/04/18, Add for otg configuration */
 	POWER_SUPPLY_NAME(otg_switch),
 	POWER_SUPPLY_NAME(otg_online),
-	#endif /* ODM_WT_EDIT */
+	#endif /* CONFIG_ODM_WT_EDIT */
 	POWER_SUPPLY_NAME(pr_swap),
 	POWER_SUPPLY_NAME(cc_step),
 	POWER_SUPPLY_NAME(cc_step_sel),
@@ -330,7 +330,7 @@ static enum power_supply_property smb5_batt_props[] = {
 	//POWER_SUPPLY_PROP_CHARGE_FULL,
 	//POWER_SUPPLY_PROP_FORCE_RECHARGE,
 	POWER_SUPPLY_PROP_FCC_STEPPER_ENABLE,
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for step re-charger vbatt setting */
 	POWER_SUPPLY_PROP_RECHARGE_UV,
 	/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add start/stop charging property */
@@ -355,7 +355,7 @@ static enum power_supply_property smb5_batt_props[] = {
 	POWER_SUPPLY_PROP_CALL_MODE,
 	//POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN,
 	POWER_SUPPLY_PROP_REAL_STATUS,
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 };
 
 static enum power_supply_property smb5_usb_props[] = {
@@ -430,7 +430,7 @@ static enum power_supply_property qg_psy_props[] = {
 	POWER_SUPPLY_PROP_FG_RESET,
 	POWER_SUPPLY_PROP_CC_SOC,
 	POWER_SUPPLY_PROP_VOLTAGE_AVG,
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for factory mode test */
 	POWER_SUPPLY_PROP_AUTHENTICATE,
 	//POWER_SUPPLY_PROP_BATT_CC,
@@ -440,7 +440,7 @@ static enum power_supply_property qg_psy_props[] = {
 	//POWER_SUPPLY_PROP_BATTERY_INFO,
 	//POWER_SUPPLY_PROP_BATTERY_INFO_ID,
 	POWER_SUPPLY_PROP_SOC_NOTIFY_READY,
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 };
 
 static enum power_supply_property smb5_usb_main_props[] = {
@@ -593,11 +593,11 @@ static int log_output_psy(struct power_supply *psy, enum power_supply_property *
 
 			if (props[j] == POWER_SUPPLY_PROP_STATUS)
 				fg_chg_log_buf_offset += snprintf(fg_chg_log_buf + fg_chg_log_buf_offset, MAX_PROP_LEN, "%s,", power_supply_status_text[value.intval]);
-		#ifdef ODM_WT_EDIT
+		#ifdef CONFIG_ODM_WT_EDIT
 			/* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for ui_soc */
 			else if (props[j] == POWER_SUPPLY_PROP_REAL_STATUS)
 				fg_chg_log_buf_offset += snprintf(fg_chg_log_buf + fg_chg_log_buf_offset, MAX_PROP_LEN, "%s,", power_supply_status_text[value.intval]);
-		#endif /* ODM_WT_EDIT */
+		#endif /* CONFIG_ODM_WT_EDIT */
 			else if (props[j] == POWER_SUPPLY_PROP_CHARGE_TYPE)
 				fg_chg_log_buf_offset += snprintf(fg_chg_log_buf + fg_chg_log_buf_offset, MAX_PROP_LEN, "%s,", power_supply_charge_type_text[value.intval]);
 			else if (props[j] == POWER_SUPPLY_PROP_HEALTH)
@@ -922,4 +922,4 @@ int deinit_fg_chg_work(struct smb_charger *chg)
 }
 
 #endif /* __WT_BATTERY_CHARGER_LOG_OUTPUT__ */
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */

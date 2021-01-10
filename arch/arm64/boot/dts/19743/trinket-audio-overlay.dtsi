@@ -17,11 +17,11 @@
 &bolero {
 	qcom,num-macros = <4>;
 	qcom,va-without-decimation;
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDITWT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/06/13, Modify for wcd9370
 	slew_rate_reg1 = <0xD8E000 0x0>;
 	slew_rate_val1 = <0x3 0x0>;
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDITWT_EDIT
 	tx_macro: tx-macro@0a460000 {
 		compatible = "qcom,tx-macro";
 		reg = <0x0a460000 0x0>;
@@ -50,10 +50,10 @@
 				<5 DMIC6 0x4>, <5 DMIC7 0x8>;
 			qcom,swr-num-dev = <1>;
 			qcom,swr-clock-stop-mode0 = <1>;
-			//ifdef ODM_WT_EDIT
+			//ifdef CONFIG_ODM_WT_EDITWT_EDIT
 			//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for wcd9370
 			qcom,swr-mstr-irq-wakeup-capable = <1>;
-			//endif ODM_WT_EDIT
+			//endif CONFIG_ODM_WT_EDITWT_EDIT
 			wcd937x_tx_slave: wcd937x-tx-slave {
 				compatible = "qcom,wcd937x-slave";
 				reg = <0x0 0x01170223>;
@@ -118,7 +118,7 @@
 				<6 SPKR_R_BOOST 0x3>, <7 SPKR_L_VI 0x3>,
 				<8 SPKR_R_VI 0x3>;
 			qcom,swr-num-dev = <1>;
-			//ifdef ODM_WT_EDIT
+			//ifdef CONFIG_ODM_WT_EDITWT_EDIT
 			//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for wcd9370
 			wsa881x_0211: wsa881x@20170211 {
 				compatible = "qcom,wsa881x";
@@ -147,7 +147,7 @@
 				reg = <0x0 0x21170214>;
 				qcom,spkr-sd-n-node = <&wsa_spkr_en1>;
 			};
-			//endif ODM_WT_EDIT
+			//endif CONFIG_ODM_WT_EDITWT_EDIT
 		};
 	};
 
@@ -187,13 +187,13 @@
 		cdc-vdd-buck-supply = <&L14A>;
 		qcom,cdc-vdd-buck-voltage = <1800000 1800000>;
 		qcom,cdc-vdd-buck-current = <650000>;
-		//ifdef ODM_WT_EDIT
+		//ifdef CONFIG_ODM_WT_EDITWT_EDIT
 		//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for micbias
 		qcom,ext-pa-gpio = <&tlmm 94 0x00>;
 
 		qcom,cdc-micbias1-mv = <2700>;
 		qcom,cdc-micbias2-mv = <2700>;
-		//endif ODM_WT_EDIT
+		//endif CONFIG_ODM_WT_EDITWT_EDIT
 		qcom,cdc-micbias3-mv = <1800>;
 
 		qcom,cdc-static-supplies = "cdc-vdd-ldo-rxtx",
@@ -206,7 +206,7 @@
 	qcom,model = "trinket-idp-snd-card";
 	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>;
 	qcom,ext-disp-audio-rx = <0>;
-	//ifdef ODM_WT_EDIT
+	//ifdef CONFIG_ODM_WT_EDITWT_EDIT
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine, 2019/04/08, Modify for audio route
 	qcom,audio-routing =
 		"AMIC1", "MIC BIAS1",
@@ -250,7 +250,7 @@
 				<&bolero>;
 	//Gong.Chen@ODM_WT.mm.audiodriver.Machine.1919162, 2019/07/19, Modify for headset
 	qcom,mbhc-audio-jack-type = "4-pole-jack";
-	//endif ODM_WT_EDIT
+	//endif CONFIG_ODM_WT_EDITWT_EDIT
 };
 
 &soc {

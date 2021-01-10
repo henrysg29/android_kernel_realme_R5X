@@ -1055,7 +1055,7 @@ EXPORT_SYMBOL(mipi_dsi_dcs_set_tear_scanline);
 int mipi_dsi_dcs_set_display_brightness(struct mipi_dsi_device *dsi,
 					u16 brightness)
 {
-	#ifndef VENDOR_EDIT
+	#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	//liwei.a@oppo.com, 2019.04.18, first params should be the higher bit of 0x51h
 	u8 payload[2] = { brightness & 0xff, brightness >> 8 };
 	#else

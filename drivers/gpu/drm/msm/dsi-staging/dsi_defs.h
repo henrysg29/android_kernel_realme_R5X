@@ -259,7 +259,7 @@ enum dsi_dfps_type {
  * @DSI_CMD_SET_POST_TIMING_SWITCH:        Post timing switch
  * @DSI_CMD_SET_QSYNC_ON                   Enable qsync mode
  * @DSI_CMD_SET_QSYNC_OFF                  Disable qsync mode
- #ifdef VENDOR_EDIT
+ #ifdef CONFIG_PRODUCT_REALME_TRINKET
  * @ Gou shengjun@PSW.MM.Display.LCD.Stability,2018/12/14, add for lcd notes
  * @DSI_CMD_POST_ON_BACKLIGHT:             Panel on cmd send for AOD and Fingerprint
  * @DSI_CMD_AOD_ON:                        Panel AOD on cmd
@@ -299,7 +299,7 @@ enum dsi_cmd_set_type {
 	DSI_CMD_SET_POST_TIMING_SWITCH,
 	DSI_CMD_SET_QSYNC_ON,
 	DSI_CMD_SET_QSYNC_OFF,
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Gou shengjun@PSW.MM.Display.LCD.Stability,2018/07/03
  * optimize screen on
 */

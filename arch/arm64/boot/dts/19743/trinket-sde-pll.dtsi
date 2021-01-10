@@ -26,13 +26,13 @@
 		clock-rate = <0>;
 		memory-region = <&dfps_data_memory>;
 		gdsc-supply = <&mdss_core_gdsc>;
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/05/17, Close ssc func for rf request
 		//qcom,dsi-pll-ssc-en;
 		//qcom,dsi-pll-ssc-mode = "down-spread";
 		//qcom,ssc-ppm = <10000>;
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/05/17, Close ssc func for rf request
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 qcom,platform-supply-entries {
 			#address-cells = <1>;
 			#size-cells = <0>;

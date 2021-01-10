@@ -241,7 +241,7 @@ static uint16_t msm_sensor_id_by_mask(struct msm_sensor_ctrl_t *s_ctrl,
 	return sensor_id;
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 static int at_msm_sensor_power_down(struct msm_sensor_ctrl_t *s_ctrl)
 {
 	if (msm_sensor_power_down(s_ctrl)< 0) {
@@ -374,7 +374,7 @@ static long msm_sensor_subdev_ioctl(struct v4l2_subdev *sd,
 		pr_err("%s s_ctrl NULL\n", __func__);
 		return -EBADF;
 	}
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	if (cmd == 0 && arg == NULL) {
 		rc = at_msm_sensor_power_down(s_ctrl);
 		return rc;

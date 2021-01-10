@@ -395,7 +395,7 @@ struct mtp_instance {
 /* temporary variable used between mtp_open() and mtp_gadget_bind() */
 static struct mtp_dev *_mtp_dev;
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //yan.chen@Swdp.shanghai, 2015/11/26, add mtp callback for hp
 static ATOMIC_NOTIFIER_HEAD(mtp_rw_notifier);
 #endif
@@ -1137,7 +1137,7 @@ static long mtp_send_receive_ioctl(struct file *fp, unsigned int code,
 	/* make sure write is done before parameters are read */
 	smp_wmb();
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //yan.chen@Swdp.shanghai, 2015/12/3, add mtp callback for hypnus
 	atomic_notifier_call_chain(&mtp_rw_notifier, code, (void *)&mfr);
 #endif
@@ -1165,7 +1165,7 @@ static long mtp_send_receive_ioctl(struct file *fp, unsigned int code,
 	/* read the result */
 	smp_rmb();
 	ret = dev->xfer_result;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //yan.chen@Swdp.shanghai, 2015/12/3, add mtp callback for hypnus
 	atomic_notifier_call_chain(&mtp_rw_notifier, code | 0x8000, (void *)&mfr);
 #endif
@@ -1182,7 +1182,7 @@ out:
 	mtp_log("ioctl returning %d\n", ret);
 	return ret;
 }
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //yan.chen@Swdp.shanghai, 2015/12/3, add mtp callback for hypnus
 int mtp_register_notifier(struct notifier_block *nb)
 {
@@ -1195,7 +1195,7 @@ int mtp_unregister_notifier(struct notifier_block *nb)
     return atomic_notifier_chain_unregister(&mtp_rw_notifier, nb);
 }
 EXPORT_SYMBOL(mtp_unregister_notifier);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 static long mtp_ioctl(struct file *fp, unsigned int code, unsigned long value)
 {

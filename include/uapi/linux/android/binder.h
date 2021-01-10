@@ -520,7 +520,7 @@ enum binder_driver_command_protocol {
 	 */
 };
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //zhoumingjun@Swdp.shanghai, 2017/07/10, notify user space when binder transaction starts
 struct process_event_binder {
     struct task_struct *src;

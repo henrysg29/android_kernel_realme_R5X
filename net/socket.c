@@ -2099,12 +2099,12 @@ static int ___sys_sendmsg(struct socket *sock, struct user_msghdr __user *msg,
 
 out_freectl:
 	if (ctl_buf != ctl) {
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* ChenYong@Rom.Framework,2019/01/15, add for prevent root check */
 #ifdef CONFIG_OPPO_ROOT_CHECK
 		memset(ctl_buf, 0, ctl_len);
 #endif /* CONFIG_OPPO_ROOT_CHECK */
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 		sock_kfree_s(sock->sk, ctl_buf, ctl_len);
 	}
 

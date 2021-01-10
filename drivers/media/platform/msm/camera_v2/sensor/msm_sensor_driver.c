@@ -19,7 +19,7 @@
 #include "msm_camera_dt_util.h"
 #include "msm_sensor_driver.h"
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /*Danfeng.Zhang@ODM_WT.Camera.Driver.1941873, 20190420, add for
 WT camera driver, save camera module info*/
 #include "linux/hardware_info.h"
@@ -157,7 +157,7 @@ static int32_t msm_sensor_driver_create_v4l_subdev
 	s_ctrl->msm_sd.sd.entity.function = MSM_CAMERA_SUBDEV_SENSOR;
 	s_ctrl->msm_sd.sd.entity.name = s_ctrl->msm_sd.sd.name;
 	s_ctrl->msm_sd.close_seq = MSM_SD_CLOSE_2ND_CATEGORY | 0x3;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	s_ctrl->msm_sd.sd.entity.group_id = MSM_CAMERA_SUBDEV_SENSOR;
 	if (s_ctrl->sensordata->sensor_info->position == 0) //back sensor
 	    s_ctrl->msm_sd.sd.entity.revision = 1;
@@ -176,7 +176,7 @@ static int32_t msm_sensor_driver_create_v4l_subdev
 	pr_err("sensor_info->position %d, sensor_name %s revision=%d",
 	    s_ctrl->sensordata->sensor_info->position, s_ctrl->sensordata->sensor_name,
 	    s_ctrl->msm_sd.sd.entity.revision);
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 	rc = msm_sd_register(&s_ctrl->msm_sd);
 	if (rc < 0) {
 		pr_err("failed: msm_sd_register rc %d", rc);
@@ -787,7 +787,7 @@ int32_t msm_sensor_driver_probe(void *setting,
 	struct msm_camera_i2c_reg_array     *reg_setting = NULL;
 	struct msm_sensor_id_info_t         *id_info = NULL;
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /*Danfeng.Zhang@ODM_WT.Camera.Driver.1941873, 20190420, add for
 WT camera driver, save camera module info*/
 	char sensor_hardware_info[128] = {0};
@@ -795,7 +795,7 @@ WT camera driver, save camera module info*/
 	WT camera driver,set different voltage for camera sensor*/
 	int32_t				i = 0;
 	struct camera_vreg_t *cam_vreg = NULL;
-#endif /*ODM_WT_EDIT*/
+#endif /*CONFIG_ODM_WT_EDIT*/
 
 	/* Validate input parameters */
 	if (!setting) {
@@ -1100,7 +1100,7 @@ WT camera driver, save camera module info*/
 	cci_client->id_map = 0;
 	cci_client->i2c_freq_mode = slave_info->i2c_freq_mode;
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	/*Danfeng.Zhang@ODM_WT.Camera.driver, 1372106, 20180508, add for
 	WT camera driver,set different voltage for camera sensor*/
 	cam_vreg = s_ctrl->sensordata->power_info.cam_vreg;
@@ -1153,7 +1153,7 @@ WT camera driver, save camera module info*/
 			}
 		}
 	}
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 	/* Parse and fill vreg params for powerup settings */
 	rc = msm_camera_fill_vreg_params(
@@ -1278,7 +1278,7 @@ CSID_TG:
 
 	msm_sensor_fill_sensor_info(s_ctrl, probed_info, entity_name);
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /*Danfeng.Zhang@ODM_WT.Camera.Driver.1941873, 20190420, add for
 WT camera driver, save camera module info*/
 	if (!strcmp(probed_info->sensor_name, "s5kgm1_xinli")){
@@ -1314,7 +1314,7 @@ WT camera driver, save camera module info*/
              probed_info->sensor_name, "Union-Image");
 		hardwareinfo_set_prop(HARDWARE_BACK_MACRO_CAM, sensor_hardware_info);
 	}
-#endif /*ODM_WT_EDIT*/
+#endif /*CONFIG_ODM_WT_EDIT*/
 	/*
 	 * Set probe succeeded flag to 1 so that no other camera shall
 	 * probed on this slot

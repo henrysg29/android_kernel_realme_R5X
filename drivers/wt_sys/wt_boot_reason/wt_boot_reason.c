@@ -1,6 +1,6 @@
 /*************************************************************************
  * ** Copyright (C), 2008-2016, OPPO Mobile Comm Corp., Ltd.
- * ** ODM_WT_EDIT
+ * ** CONFIG_ODM_WT_EDIT
  * ** File: - wt_boot_reason.c
  * ** Description: Add for boot reason
  * ** Version: 1.0

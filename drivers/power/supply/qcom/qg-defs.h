@@ -27,7 +27,7 @@
 		|| ((left) <= (right) && (left) <= (value) \
 			&& (value) <= (right)))
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for store SOC */
 #define dump_all_soc(chip, val)	\
 	do { \

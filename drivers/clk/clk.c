@@ -3446,14 +3446,14 @@ EXPORT_SYMBOL_GPL(clk_debugfs_add_file);
  *
  */
 //yangmingjin@BSP.POWER.Basic 2019/05/27 add for RM_TAG_POWER_DEBUG
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 extern bool is_not_in_xo_mode(void);
 #endif
-/* VENDOR_EDIT */
+/* CONFIG_PRODUCT_REALME_TRINKET */
 void clock_debug_print_enabled(bool print_parent)
 {
 //yangmingjin@BSP.POWER.Basic 2019/05/27 add for RM_TAG_POWER_DEBUG
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
     if (likely(!debug_suspend) && !is_not_in_xo_mode())
         return;
     if(is_not_in_xo_mode())
@@ -3462,7 +3462,7 @@ void clock_debug_print_enabled(bool print_parent)
 	if (likely(!debug_suspend))
 		return;
 #endif
-/* VENDOR_EDIT */
+/* CONFIG_PRODUCT_REALME_TRINKET */
 	if (print_parent)
 		clock_debug_print_enabled_clocks(NULL);
 	else

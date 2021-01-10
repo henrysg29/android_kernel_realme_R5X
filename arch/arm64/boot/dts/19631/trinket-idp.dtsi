@@ -27,16 +27,16 @@
 
 &soc {
 	mtp_batterydata: qcom,battery-data {
-	//#ifndef ODM_WT_EDIT
+	//#ifndef CONFIG_ODM_WT_EDIT
 	//Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Modify for battery temperature scale function
 	//	qcom,batt-id-range-pct = <15>;
 	//	#include "qg-batterydata-ascent-3450mah.dtsi"
 	//	#include "qg-batterydata-mlp356477-2800mah.dtsi"
-	//#else /* ODM_WT_EDIT */
+	//#else /* CONFIG_ODM_WT_EDIT */
 		qcom,batt-id-range-pct = <15>;
 		//#include "qg-batterydata-OPPO-DD003desay-ATL-4v4-4230mAh.dtsi"
 		#include "qg-batterydata-OPPO-Brandon_ATL-4910mAh.dtsi"
-	//#endif /* ODM_WT_EDIT */
+	//#endif /* CONFIG_ODM_WT_EDIT */
 	};
 
 };
@@ -684,7 +684,7 @@
 	pinctrl-0 = <&sdc2_clk_on  &sdc2_cmd_on &sdc2_data_on &sdc2_cd_on>;
 	pinctrl-1 = <&sdc2_clk_off &sdc2_cmd_off &sdc2_data_off &sdc2_cd_off>;
 
-	//#ifdef ODM_WT_EDIT
+	//#ifdef CONFIG_ODM_WT_EDIT
         //Haibin1.Zhang@ODM_WT.BSP.Storage.sdcard, 2019/04/25, Modify for SDcard configuration
 	cd-gpios = <&tlmm 98 GPIO_ACTIVE_HIGH>;
 	//#endif
@@ -693,14 +693,14 @@
 };
 
 &pmi632_qg {
-//#ifndef ODM_WT_EDIT
+//#ifndef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190429, Add for change charger behavior */
 //	qcom,battery-data = <&mtp_batterydata>;
 //	qcom,qg-iterm-ma = <100>;
 //	qcom,hold-soc-while-full;
 //	qcom,linearize-soc;
 //	qcom,qg-use-s7-ocv;
-//#else /* ODM_WT_EDIT */
+//#else /* CONFIG_ODM_WT_EDIT */
 	qcom,battery-data = <&mtp_batterydata>;
 	qcom,qg-iterm-ma = <350>;
 	qcom,hold-soc-while-full;
@@ -710,11 +710,11 @@
 	qcom,s3-exit-ibat-ua = <38000>;
 
 	qcom,qg-restore-batt-info;
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 };
 
 &pmi632_charger {
-//#ifndef ODM_WT_EDIT
+//#ifndef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190429, Add for change charger behavior */
 //	qcom,battery-data = <&mtp_batterydata>;
 //	qcom,suspend-input-on-debug-batt;
@@ -732,12 +732,12 @@
 //	qcom,connector-internal-pull-kohm = <100>;
 //	qcom,thermal-mitigation = <3000000 2500000
 //			2000000 1500000 1000000 500000>;
-//#else /* ODM_WT_EDIT */
+//#else /* CONFIG_ODM_WT_EDIT */
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190429, Add for change charger behavior */
 	qcom,battery-data = <&mtp_batterydata>;
 	qcom,suspend-input-on-debug-batt;
 	dpdm-supply = <&qusb_phy0>;
-	//#ifdef ODM_WT_EDIT
+	//#ifdef CONFIG_ODM_WT_EDIT
 	/*dijin.liu@Cam.Drv , 2074359 , remove platform setting under lower power mode can not use flash */
 	/* 10 -> 0 */
 	qcom,flash-disable-soc = <0>;
@@ -750,7 +750,7 @@
 	//qcom,sw-jeita-enable;
 	qcom,float-option = <1>;
 	qcom,hvdcp-disable;
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 };
 
 &usb0 {
@@ -944,7 +944,7 @@
 	qcom,platform-bklight-en-gpio = <&pmi632_gpios 6 0>;
 };
 
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, Start 2019/04/6, Add for LCD bring up
 &dsi_ili9881h_truly_video {
 	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
@@ -986,7 +986,7 @@
 	qcom,dsi-display-active;
 };
 //Hongzhu.Su@ODM_WT.MM.Display.Lcd.1941873, End 2019/04/6, Add for LCD bring up
-//#endif /* ODM_WT_EDIT */
+//#endif /* CONFIG_ODM_WT_EDIT */
 
 &qupv3_se2_i2c {
 	status = "okay";

@@ -6021,7 +6021,7 @@ tracing_entries_write(struct file *filp, const char __user *ubuf,
 	/* value is in KB */
 	val <<= 10;
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/07/30, add for limit ftrace buffer size in Ageing build
 #ifdef CONFIG_OPPO_SPECIAL_BUILD
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/07/13, add for limit ftrace buffer size

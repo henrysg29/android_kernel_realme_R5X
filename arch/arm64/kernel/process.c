@@ -58,7 +58,7 @@
 #include <asm/mmu_context.h>
 #include <asm/processor.h>
 #include <asm/stacktrace.h>
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #include <wt_sys/wt_boot_reason.h>
 #endif
@@ -261,7 +261,7 @@ void __show_regs(struct pt_regs *regs)
 	print_symbol("pc : %s\n", regs->pc);
 	print_symbol("lr : %s\n", lr);
 	printk("sp : %016llx pstate : %08llx\n", sp, regs->pstate);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 	if (wt_panic_oops == 1) {

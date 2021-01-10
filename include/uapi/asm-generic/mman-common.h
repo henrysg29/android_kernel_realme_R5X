@@ -25,7 +25,7 @@
 #else
 # define MAP_UNINITIALIZED 0x0		/* Don't support this flag */
 #endif
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 /* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
  * reserved vma mmap flag
  */

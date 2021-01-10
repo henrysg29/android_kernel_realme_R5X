@@ -323,7 +323,7 @@ static const struct vadc_map_pt adcmap_batt_therm_30k[] = {
  * Voltage to temperature table for 30k pull up for bat_therm with
  * MLP356477.
  */
-#ifndef ODM_WT_EDIT
+#ifndef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190404, Mofify the ADC Channel because of battery ntc was 10K */
 /* Voltage to temperature */
 static const struct vadc_map_pt adcmap_batt_therm_30k_6125[] = {
@@ -398,7 +398,7 @@ static const struct vadc_map_pt adcmap_batt_therm_30k_6125[] = {
 	{372,	960},
 	{357,	980},
 };
-#else /* ODM_WT_EDIT */
+#else /* CONFIG_ODM_WT_EDIT */
 /*
 	Voltage to temperature
 	NTC 10k, Beta 3380. Add 5.1K resistance in NTC network. voltage to temperature
@@ -477,7 +477,7 @@ static const struct vadc_map_pt adcmap_batt_therm_30k_6125[] = {
 	{322,	960},
 	{320,	980}
 };
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 /*
  * Voltage to temperature table for 400k pull up for bat_therm with

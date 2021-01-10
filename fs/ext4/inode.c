@@ -1458,7 +1458,7 @@ errout:
 			ext4_orphan_del(NULL, inode);
 	}
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)
 //yh@PSW.BSP.Storage.EXT4, 2018-11-26 add for ext4 async discard suppot
 	ext4_update_time(EXT4_SB(inode->i_sb));
 #endif
@@ -1580,7 +1580,7 @@ errout:
 			ext4_orphan_del(NULL, inode);
 	}
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)
 //yh@PSW.BSP.Storage.EXT4, 2018-11-26 add for ext4 async discard suppot
 	ext4_update_time(EXT4_SB(inode->i_sb));
 #endif
@@ -4483,7 +4483,7 @@ int ext4_truncate(struct inode *inode)
 	if (inode->i_size & (inode->i_sb->s_blocksize - 1))
 		ext4_block_truncate_page(handle, mapping, inode->i_size);
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)
 	//yh@PSW.BSP.Storage.EXT4, 2018-11-26 add for ext4 async discard suppot
 	ext4_update_time(EXT4_SB(inode->i_sb));
 #endif

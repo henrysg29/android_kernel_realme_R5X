@@ -417,7 +417,7 @@
 			vbmeta {
 				compatible = "android,vbmeta";
 
-				//#ifndef VENDOR_EDIT
+				//#ifndef CONFIG_PRODUCT_REALME_TRINKET
 				//parts = "vbmeta,boot,system,vendor,dtbo";
 				//#else
 				parts = "vbmeta,boot,recovery,system,vendor,dtbo";
@@ -430,19 +430,19 @@
 				compatible = "android,fstab";
 				vendor {
 					compatble = "android,vendor";
-					//#ifndef VENDOR_EDIT
+					//#ifndef CONFIG_PRODUCT_REALME_TRINKET
 					dev = "/dev/block/platform/soc/4804000.ufshc/by-name/vendor";
 					//#else
 					//dev = "/dev/block/platform/soc/4744000.sdhci/by-name/vendor";
 					//#endif
 					type = "ext4";
-                          /*#if defined(VENDOR_EDIT) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)*/
+                          /*#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_EXT4_ASYNC_DISCARD_SUPPORT)*/
                           /*yh@PSW.BSP.Storage.EXT4, 2018-11-26 add for ext4 async discard suppot*/
 					mnt_flags = "ro,barrier=1,discard";
                           /*#else*/
 					/*mnt_flags = "ro,barrier=1,discard";*/
                           /*#endif*/
-					//#ifndef VENDOR_EDIT
+					//#ifndef CONFIG_PRODUCT_REALME_TRINKET
 					//#Yunqing.Zeng@BSP.Kernel.Driver, 2019/03/28, Modify for AB partition disable.
 					//fsmgr_flags = "wait,slotselect,avb";
 					//#else
@@ -602,7 +602,7 @@
 			label = "disp_rdump_region";
 		};
 
-		/* #ifdef ODM_WT_EDIT */
+		/* #ifdef CONFIG_ODM_WT_EDIT */
 		/* Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/04/20, Add for save bootloader log */
 		wt_share_mem: wt_region@62000000 {
 			compatible = "wt_share_mem";
@@ -623,7 +623,7 @@
 	};
 };
 
-/*#ifdef VENDOR_EDIT Hongyu.lu@BSP.Fingerprint.Basic 2019-04-17 add for fingerprint */
+/*#ifdef CONFIG_PRODUCT_REALME_TRINKET Hongyu.lu@BSP.Fingerprint.Basic 2019-04-17 add for fingerprint */
 &soc {
     oppo_fp_common { //Slave driver and CS ID
         compatible = "oppo,fp_common"; //Manufacture, and Model
@@ -645,7 +645,7 @@
     };
 
 };
-/*#endif VENDOR_EDIT */
+/*#endif CONFIG_PRODUCT_REALME_TRINKET */
 
 &soc {
 	#address-cells = <1>;
@@ -1144,7 +1144,7 @@
 			reg = <0xc8 200>;
 		};
 
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 		wt_reset_reason_addr@fe4 {
 			compatible = "qcom,msm-imem-wt_reset_reason_addr";
@@ -1295,7 +1295,7 @@
 		reg = <0xf017000 0x1000>;
 		reg-names = "wdt-base";
 		interrupts = <0 3 0>, <0 4 0>;
-		//#ifndef ODM_WT_EDIT
+		//#ifndef CONFIG_ODM_WT_EDIT
 		//Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/04/23, Add for set watchdog timeout=15s
 		//qcom,bark-time = <11000>;
 		//#else
@@ -2122,7 +2122,7 @@
 		qcom,guard-memory;
 	};
 
-        //#ifdef VENDOR_EDIT
+        //#ifdef CONFIG_PRODUCT_REALME_TRINKET
         //Zhengpeng.Tan@NW.AP.NV.892767, 2016/11/30
         //#ifdef FEATURE_OPPO_NV_BACKUP
         //add for creating a shared memory with uio for nv backup and restore
@@ -2134,7 +2134,7 @@
         qcom,guard-memory;
     };
         //#endif /* FEATURE_OPPO_NV_BACKUP */
-        //#endif /* VENDOR_EDIT */
+        //#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 	qcom_cedev: qcedev@1b20000 {
 		compatible = "qcom,qcedev";
 		reg = <0x1b20000 0x20000>,
@@ -2978,7 +2978,7 @@
 		qcom,hw-settle-time = <200>;
 		qcom,pre-scaling = <1 1>;
 	};
-//#ifdef VENDOR_EDIT //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
+//#ifdef CONFIG_PRODUCT_REALME_TRINKET //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
 //	skin_therm {
 //		reg = <ADC_GPIO2_PU2>;
 //		label = "skin_therm";
@@ -3008,7 +3008,7 @@
 
 &pmi632_adc_tm {
 	io-channels = <&pmi632_vadc ADC_GPIO1_PU2>,
-        //#ifdef VENDOR_EDIT //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
+        //#ifdef CONFIG_PRODUCT_REALME_TRINKET //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
 			<&pmi632_vadc ADC_VBAT_SNS>;
         //#else
 			//<&pmi632_vadc ADC_VBAT_SNS>,
@@ -3028,7 +3028,7 @@
 		qcom,prescaling = <3>;
 	};
 
-//#ifdef VENDOR_EDIT //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
+//#ifdef CONFIG_PRODUCT_REALME_TRINKET //Cong.Dai@psw.bsp.tp, 2019.05.17, del ADC_GPIO2_PU2 used for A board
 //	skin_therm {
 //		reg = <ADC_GPIO2_PU2>;
 //		qcom,ratiometric;
@@ -3214,13 +3214,13 @@
 };
 
 &L1P {
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 	/*Danfeng.Zhang@ODM_WT.Camera.driver, 1372106, 20180508, add for
 	WT camera driver,set different voltage for camera sensor*/
 	regulator-min-microvolt = <1050000>;
 /*#else
 	regulator-min-microvolt = <1200000>;
-//#endif*/ /*ODM_WT_EDIT*/
+//#endif*/ /*CONFIG_ODM_WT_EDIT*/
 	regulator-max-microvolt = <1200000>;
 	qcom,min-dropout-voltage = <100000>;
 };
@@ -3232,13 +3232,13 @@
 };
 
 &L3P {
-//#ifdef ODM_WT_EDIT
+//#ifdef CONFIG_ODM_WT_EDIT
 	/*Danfeng.Zhang@ODM_WT.Camera.driver, 1372106, 20180508, add for
 	WT camera driver,set different voltage for camera sensor*/
 	regulator-min-microvolt = <2700000>;
 /*#else
 	regulator-min-microvolt = <2800000>;
-//#endif*/ /*ODM_WT_EDIT*/
+//#endif*/ /*CONFIG_ODM_WT_EDIT*/
 	regulator-max-microvolt = <2800000>;
 };
 

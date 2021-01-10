@@ -135,11 +135,11 @@ static int one_thousand = 1000;
 #ifdef CONFIG_SCHED_WALT
 static int two_million = 2000000;
 #endif
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /*jason.tang@TECH.BSP.Kernel.Storage, 2019-05-20, add control ext4 fsync*/
 unsigned int sysctl_ext4_fsync_enable = 1;
 unsigned int ext4_fsync_enable_status = 0;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 #ifdef CONFIG_PRINTK
 static int ten_thousand = 10000;
 #endif
@@ -444,7 +444,7 @@ static struct ctl_table kern_table[] = {
 		.mode		= 0644,
 		.proc_handler	= sched_updown_migrate_handler,
 	},
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /*jason.tang@TECH.BSP.Kernel.Storage, 2019-05-20, add control ext4 fsync*/
 {
 		.procname	= "ext4_fsync_enable",

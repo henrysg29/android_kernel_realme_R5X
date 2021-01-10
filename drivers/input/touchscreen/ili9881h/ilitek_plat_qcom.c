@@ -21,8 +21,8 @@
  */
 
 #include "ilitek.h"
-#ifndef ODM_WT_EDIT
-#define ODM_WT_EDIT
+#ifndef CONFIG_ODM_WT_EDIT
+#define CONFIG_ODM_WT_EDIT
 #endif
 
 #define DTS_INT_GPIO	"touch,irq-gpio"
@@ -32,7 +32,7 @@ extern struct ili_gesture_info * gesture_report_data;
 bool is_resume = false;
 bool is_ilitek_tp = false;
 struct wakeup_source *reload_fw_ws = NULL;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //liuhao1@ODM_WT.BSP.Tp.Init,temp,2019/4/17,Add for compatible old and new module
  int ili_ctpmodule = -1;
 //Bin.Su@ODM_WT.BSP.TP.FUNCTION.2018/12/05,four ICs adjust
@@ -48,7 +48,7 @@ unsigned char fw_xlgg3[] = {
 #include "firmware_ili/AUOGG3/RA170A1.ili"
 };
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Bin.Su@ODM_WT.BSP.TP,2019/06/05,Add sign firmware function begain
 struct upgrade_ili_fw_info ili_fw_list[] = {
     {XL, "TRULY", fw_xl,(int)sizeof(fw_xl), REQUEST_FW_PATH_AUO, XL_INI_NAME_PATH,OPPO_SIGN_AUO},
@@ -586,7 +586,7 @@ static void ilitek_plat_sleep_init(void)
 #endif
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //liuhao1@ODM_WT.BSP.TP.FUNCTION.2019/5/4, add ear phone function
 /**
  * add aer phone function
@@ -629,7 +629,7 @@ static void ipd_headset_notifier_init(void)
 }
 #endif
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //liuhao1@ODM_WT.BSP.TP.FUNCTION.2019/5/29, add usb function
 /**
  * add aer phone function
@@ -673,7 +673,7 @@ static void ipd_usb_notifier_init(void)
 static int ilitek_plat_probe(void)
 {
 	int ret;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //liuhao1@ODM_WT.BSP.Tp.Init,temp,2019/4/17,Add for compatible old and new module
 	char *temp = NULL;
 	char * cmdline_tp = NULL;
@@ -681,7 +681,7 @@ static int ilitek_plat_probe(void)
 #endif
 
 	ipio_info("platform probe\n");
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //liuhao1@ODM_WT.BSP.Tp.Init,temp,2019/4/17,Add for compatible old and new module
 /*
 dsi_ili9881h_truly_video_display  	 	（群创的临时屏）
@@ -735,7 +735,7 @@ dsi_ili9881h_innolux_inx_video_display  （群创的正式屏）
 	if (ret) {
         ipio_info("ilitek power on fail\n");
 	}
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	//bin.su@ODM_WT.BSP.Tp,2019/7/23,solver problem of power on twice
 	idev->power_status = true;
 	ipio_info("power_status = %d\n",idev->power_status);
@@ -764,12 +764,12 @@ dsi_ili9881h_innolux_inx_video_display  （群创的正式屏）
 		}
 	}
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 	//liuhao1@ODM_WT.BSP.TP.FUNCTION.2019/5/4, add ear phone function
 		INIT_WORK(&idev->headset_work_queue, ipd_headset_work_queue);
 		ipd_headset_notifier_init();
 #endif
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 				//liuhao1@ODM_WT.BSP.TP.FUNCTION.2019/5/29, add usb phone function
 					INIT_WORK(&idev->usb_work_queue, ipd_usb_work_queue);
 					ipd_usb_notifier_init();

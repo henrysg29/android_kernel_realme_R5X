@@ -34,7 +34,7 @@ static struct device_type power_supply_dev_type;
 
 #define POWER_SUPPLY_DEFERRED_REGISTER_TIME	msecs_to_jiffies(10)
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /*jason.tang@TECH.BSP.Kernel.Storage, 2019-05-20, add control ext4 fsync*/
 extern int sysctl_ext4_fsync_enable;
 extern int ext4_fsync_enable_status;
@@ -117,7 +117,7 @@ static void power_supply_changed_work(struct work_struct *work)
 				      __power_supply_changed_work);
 		power_supply_update_leds(psy);
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /*jason.tang@TECH.BSP.Kernel.Storage, 2019-05-20, add control ext4 fsync*/
 		if(sysctl_ext4_fsync_enable) {
 			power_supply_update_fsync(psy);
@@ -125,7 +125,7 @@ static void power_supply_changed_work(struct work_struct *work)
 			if(ext4_fsync_enable_status != 0)
 				ext4_fsync_enable_status = 0;
 		}
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 		atomic_notifier_call_chain(&power_supply_notifier,
 				PSY_EVENT_PROP_CHANGED, psy);

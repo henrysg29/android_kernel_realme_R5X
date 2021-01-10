@@ -29,7 +29,7 @@
 #include <linux/workqueue.h>
 
 #define UEVENT_HELPER_PATH_LEN		256
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* LiYue@BSP.CHG.Basic, 2019/07/18.  Add for charging */
 #define UEVENT_NUM_ENVP         128 /* number of env pointers */
 #define UEVENT_BUFFER_SIZE      4096    /* buffer for the variables */

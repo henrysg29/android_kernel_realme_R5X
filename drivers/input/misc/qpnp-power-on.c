@@ -900,7 +900,7 @@ static int qpnp_pon_input_dispatch(struct qpnp_pon *pon, u32 pon_type)
 		return -EINVAL;
 	}
 
-#ifndef ODM_WT_EDIT
+#ifndef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/08, Add for print key code log.
 	pr_debug("PMIC input: code=%d, status=0x%02X\n", cfg->key_code,
 		pon_rt_sts);
@@ -1528,12 +1528,12 @@ static int qpnp_pon_config_init(struct qpnp_pon *pon,
 	int rc = 0, i = 0, pmic_wd_bark_irq;
 	struct device_node *cfg_node = NULL;
 	struct qpnp_pon_config *cfg;
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190625, Add for set pshold to hard reset */
 #ifdef WT_FINAL_RELEASE
 	unsigned int val;
 #endif /* WT_FINAL_RELEASE */
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 	if (pon->num_pon_config) {
 		pon->pon_cfg = devm_kcalloc(pon->dev, pon->num_pon_config,
@@ -1542,14 +1542,14 @@ static int qpnp_pon_config_init(struct qpnp_pon *pon,
 			return -ENOMEM;
 	}
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190625, Add for set pshold to hard reset */
 #ifdef WT_FINAL_RELEASE
 	qpnp_pon_read(pon, QPNP_PON_PS_HOLD_RST_CTL(pon), &val);
 	pr_info("modify ps_hold reset type from 0x%02X to 0x07!\n", val);
 	qpnp_pon_masked_write(pon, QPNP_PON_PS_HOLD_RST_CTL(pon), 0xFF, 0x07);
 #endif /* WT_FINAL_RELEASE */
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 	/* Iterate through the list of pon configs */
 	for_each_available_child_of_node(pon->dev->of_node, cfg_node) {
@@ -2212,7 +2212,7 @@ static int qpnp_pon_parse_dt_power_off_config(struct qpnp_pon *pon)
 	return 0;
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //Hui.Wang@ODM_WT.BSP.Kernel.Stability.1919220, 2019/04/25, add for boot mode
 enum {
 	MSM_BOOT_MODE__NORMAL,

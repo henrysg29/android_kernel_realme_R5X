@@ -1123,7 +1123,7 @@ static void setup_64bit_pagetable(struct kgsl_mmu *mmu,
 		pt->va_start = KGSL_IOMMU_VA_BASE64;
 		pt->va_end = KGSL_IOMMU_VA_END64;
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_VIRTUAL_RESERVE_MEMORY)
 		/* Kui.Zhang@PSW.TEC.KERNEL.Performance, 2019/03/18,
 		 * record the high limit of gpu mmap_base, used for create
 		 * reserved area

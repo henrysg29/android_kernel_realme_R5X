@@ -268,10 +268,10 @@ static int clk_branch2_enable(struct clk_hw *hw)
 	int ret = 0;
 	ret = clk_branch_toggle(hw, true, clk_branch2_check_halt);
 //yangmingjin@BSP.POWER.Basic 2019/05/27 delete for RM_TAG_POWER_DEBUG
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	printk("[%s] clk_branch2_enable is called ret = %d\n",clk_hw_get_name(hw),ret);
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 	return ret;
 }
 
@@ -311,10 +311,10 @@ static int clk_branch2_prepare(struct clk_hw *hw)
 	}
 exit:
 //yangmingjin@BSP.POWER.Basic 2019/05/27 delete for RM_TAG_POWER_DEBUG
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	printk("[%s] clk_branch2_prepare is called ret = %d\n",clk_hw_get_name(hw),ret);
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 	return ret;
 }
 

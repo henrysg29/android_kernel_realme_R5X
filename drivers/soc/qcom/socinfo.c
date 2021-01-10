@@ -239,7 +239,7 @@ struct socinfo_v0_15 {
 	uint32_t nmodem_supported;
 };
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 struct socinfo_v0_16 {
 	struct socinfo_v0_15 v0_15;
@@ -263,14 +263,14 @@ static union {
 	struct socinfo_v0_13 v0_13;
 	struct socinfo_v0_14 v0_14;
 	struct socinfo_v0_15 v0_15;
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	//WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 	struct socinfo_v0_16 v0_16;
 	#endif
 } *socinfo;
 
 /* max socinfo format version supported */
-#ifndef ODM_WT_EDIT
+#ifndef CONFIG_ODM_WT_EDIT
 //WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 #define MAX_SOCINFO_FORMAT SOCINFO_VERSION(0, 15)
 #else
@@ -391,7 +391,7 @@ static struct msm_soc_info cpu_of_id[] = {
 
 	/* sa6155 ID */
 	[384] = {MSM_CPU_SA6155, "SA6155"},
-#if defined(VENDOR_EDIT) && defined(CONFIG_CONFIDENTIAL_VERSION)
+#if defined(CONFIG_PRODUCT_REALME_TRINKET) && defined(CONFIG_CONFIDENTIAL_VERSION)
 /*Fanhong.Kong@PSW.BSP.CHG, 2019-02-12
  *Obscure the cpu model number in confidential version
  */
@@ -400,7 +400,7 @@ static struct msm_soc_info cpu_of_id[] = {
 #else
 	/* trinket ID */
 	[394] = {MSM_CPU_TRINKET, "SDM665"},
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 	/* Uninitialized IDs are not known to run Linux.
 	 * MSM_CPU_UNKNOWN is set to 0 to ensure these IDs are
 	 * considered as unknown CPU.
@@ -416,7 +416,7 @@ static struct socinfo_v0_1 dummy_socinfo = {
 	.version = 1,
 };
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 uint32_t nfc_support_info;
 #endif
@@ -665,7 +665,7 @@ static uint32_t socinfo_get_nmodem_supported(void)
 		: 0;
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 static uint32_t socinfo_get_board_nfc_support(void)
 {
@@ -940,7 +940,7 @@ msm_get_pmic_die_revision(struct device *dev,
 			 socinfo_get_pmic_die_revision());
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 static ssize_t
 msm_get_board_nfc_support(struct device *dev,
@@ -1249,7 +1249,7 @@ static struct device_attribute msm_soc_attr_pmic_die_revision =
 	__ATTR(pmic_die_revision, 0444,
 			msm_get_pmic_die_revision, NULL);
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 static struct device_attribute msm_soc_attr_board_nfc_support =
 	__ATTR(board_nfc_support, 0444,
@@ -1376,13 +1376,13 @@ static void __init populate_soc_sysfs_files(struct device *msm_soc_device)
 	device_create_file(msm_soc_device, &image_crm_version);
 	device_create_file(msm_soc_device, &select_image);
 	device_create_file(msm_soc_device, &images);
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	//WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 	device_create_file(msm_soc_device, &msm_soc_attr_board_nfc_support);
 	#endif
 
 	switch (socinfo_format) {
-	//#ifdef ODM_WT_EDIT
+	//#ifdef CONFIG_ODM_WT_EDIT
 	//WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 	//case SOCINFO_VERSION(0, 16):
 	//	device_create_file(msm_soc_device,
@@ -1682,7 +1682,7 @@ static void socinfo_print(void)
 			socinfo->v0_15.nmodem_supported);
 		break;
 
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	//WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 	case SOCINFO_VERSION(0, 16):
 		pr_info("v%u.%u, id=%u, ver=%u.%u, raw_id=%u, raw_ver=%u, hw_plat=%u, hw_plat_ver=%u\n accessory_chip=%u, hw_plat_subtype=%u, pmic_model=%u, pmic_die_revision=%u foundry_id=%u serial_number=%u num_pmics=%u chip_family=0x%x raw_device_family=0x%x raw_device_number=0x%x nproduct_id=0x%x num_clusters=0x%x ncluster_array_offset=0x%x num_defective_parts=0x%x ndefective_parts_array_offset=0x%x nmodem_supported=0x%x board_nfc_support=%u\n",
@@ -1716,7 +1716,7 @@ static void socinfo_print(void)
 	}
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 //WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 static unsigned int str2u(char *str)
 {
@@ -1799,7 +1799,7 @@ int __init socinfo_init(void)
 
 	cur_cpu = cpu_of_id[socinfo->v0_1.id].generic_soc_type;
 	boot_stats_init();
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	//WT000007@ODM_WT.BSP.SENSOR,2019/06/04, Add for mag compatible
 	detect_board_nfc_support();
 	#endif

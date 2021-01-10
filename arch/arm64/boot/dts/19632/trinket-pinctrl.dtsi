@@ -12,7 +12,7 @@
 
 #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
 
-/*#ifdef VENDOR_EDIT Hongyu.lu@BSP.Fingerprint.Basic 2019-04-17 add for fingerprint */
+/*#ifdef CONFIG_PRODUCT_REALME_TRINKET Hongyu.lu@BSP.Fingerprint.Basic 2019-04-17 add for fingerprint */
 &soc {
     oppo_fp_common{
         gpio_id1_default: gpio_id1_default {
@@ -45,7 +45,7 @@
     };
 
 };
-/*#endif VENDOR_EDIT */
+/*#endif CONFIG_PRODUCT_REALME_TRINKET */
 &soc {
 	tlmm: pinctrl@400000 {
 		compatible = "qcom,trinket-pinctrl";
@@ -490,7 +490,7 @@
 				config {
 						pins = "gpio16", "gpio17";
 						drive-strength = <2>;
-						//#ifdef VENDOR_EDIT /* tongfeng.Huang@BSP.CHG.Basic, 2018/06/26, sjc Add for charging */
+						//#ifdef CONFIG_PRODUCT_REALME_TRINKET /* tongfeng.Huang@BSP.CHG.Basic, 2018/06/26, sjc Add for charging */
 						input-enable;
 						//#endif
 						bias-pull-down;
@@ -2002,7 +2002,7 @@
 				drive-strength = <4>; /* 4 MA */
 			};
 		};
-/*#ifdef ODM_WT_EDIT*/
+/*#ifdef CONFIG_ODM_WT_EDIT*/
 /*Danfeng.Zhang@ODM_WT.Camera.Driver.1941873, 20190408, Add for brinup camera back aux camera*/
 		cam_sensor_front2_active: cam_sensor_front2_active {
 			/*PWDN RESET*/
@@ -2060,8 +2060,8 @@
 				drive-strength = <4>; /* 4 MA */
 			};
 		};
-/*#endif ODM_WT_EDIT*/
-		//#ifdef ODM_WT_EDIT
+/*#endif CONFIG_ODM_WT_EDIT*/
+		//#ifdef CONFIG_ODM_WT_EDIT
 		//Haibin1.Zhang@ODM_WT.BSP.Storage.otg, 2019/04/18, Add for otg configuration
 		usbid_default: usbid_default {
 			mux {
@@ -2088,7 +2088,7 @@
 				bias-pull-down;
 			};
 		};
-		//#endif /* ODM_WT_EDIT */
+		//#endif /* CONFIG_ODM_WT_EDIT */
 	};
 };
 

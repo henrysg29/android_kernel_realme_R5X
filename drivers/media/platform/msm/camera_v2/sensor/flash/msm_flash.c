@@ -20,7 +20,7 @@
 #include "msm_camera_dt_util.h"
 #include "msm_cci.h"
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* xuegui.bao@cam.drv 20190415 add for qcom-flash node */
 #include <linux/proc_fs.h>
 #include <linux/time.h>
@@ -1283,7 +1283,7 @@ static long msm_flash_subdev_fops_ioctl(struct file *file,
 }
 #endif
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* xuegui.bao@cam.drv 20190415 add for qcom-flash node */
 struct regulator *vreg_vendor = NULL;
 volatile static int flash_mode = 0, pre_flash_mode = 0;
@@ -1487,7 +1487,7 @@ static int32_t msm_flash_platform_probe(struct platform_device *pdev)
 	if (flash_ctrl->flash_driver_type == FLASH_DRIVER_PMIC)
 		rc = msm_torch_create_classdev(pdev, flash_ctrl);
 
-    #ifdef ODM_WT_EDIT
+    #ifdef CONFIG_ODM_WT_EDIT
     /* xuegui.bao@cam.drv 20190415 add for qcom-flash node */
     flash_proc_init(flash_ctrl);
     #endif

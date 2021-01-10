@@ -531,7 +531,7 @@ static int msm_gpio_get(struct gpio_chip *chip, unsigned offset)
 	val = readl(base + g->io_reg);
 	return !!(val & BIT(g->in_bit));
 }
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Fuchun.Liao@Mobile.BSP.CHG 2016-01-19 add for oppo vooc adapter update
 static int msm_gpio_get_oppo_vooc(struct gpio_chip *chip, unsigned offset)
 {
@@ -545,7 +545,7 @@ static int msm_gpio_get_oppo_vooc(struct gpio_chip *chip, unsigned offset)
 	val = readl_oppo_vooc(pctrl->regs + g->io_reg);
 	return !!(val & BIT(g->in_bit));
 }
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 
 static void msm_gpio_set(struct gpio_chip *chip, unsigned offset, int value)
 {
@@ -569,7 +569,7 @@ static void msm_gpio_set(struct gpio_chip *chip, unsigned offset, int value)
 
 	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
 }
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Fuchun.Liao@Mobile.BSP.CHG 2016-01-19 add for oppo vooc adapter update
 static void msm_gpio_set_oppo_vooc(struct gpio_chip *chip, unsigned offset, int value)
 {
@@ -591,11 +591,11 @@ static void msm_gpio_set_oppo_vooc(struct gpio_chip *chip, unsigned offset, int 
 
 	//spin_unlock_irqrestore(&pctrl->lock, flags);
 }
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 #ifdef CONFIG_DEBUG_FS
 #include <linux/seq_file.h>
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	static const char * const values[] = {
 		"high",
 		"low"
@@ -634,7 +634,7 @@ static void msm_gpio_dbg_show_one(struct seq_file *s,
 	int is_out;
 	int drive;
 	int pull;
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	int in_value;
 	int out_value;
 	int intr_enable;
@@ -661,7 +661,7 @@ static void msm_gpio_dbg_show_one(struct seq_file *s,
 	drive = (ctl_reg >> g->drv_bit) & 7;
 	pull = (ctl_reg >> g->pull_bit) & 3;
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_PRODUCT_REALME_TRINKET
     printk("  g->in_bit = %x,g->on_bit = %x,  g->intr_enable = %d,g->intr_polarity = %d, intr_detection = %d\n",g->in_bit, g->out_bit,g->intr_enable_bit,g->intr_polarity_bit,g->intr_detection_bit);
 	io_reg = readl(base + g->io_reg);
 	intr_cfg_reg = readl(base + g->intr_cfg_reg);
@@ -687,7 +687,7 @@ static void msm_gpio_dbg_show_one(struct seq_file *s,
 	seq_printf(s, " %s%s", intr_polaritys[intr_polarity], intr_detections[intr_detection]);	
 #endif
 
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	seq_printf(s, " %-8s: %-3s %d", g->name, is_out ? "out" : "in", func);
 	seq_printf(s, " %dmA", msm_regval_to_drive(drive));
 	seq_printf(s, " %s", pulls[pull]);
@@ -699,7 +699,7 @@ static void msm_gpio_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 	unsigned gpio = chip->base;
 	unsigned i;
 
-	#ifndef ODM_WT_EDIT
+	#ifndef CONFIG_ODM_WT_EDIT
 	for (i = 0; i < chip->ngpio; i++, gpio++) {
 		msm_gpio_dbg_show_one(s, NULL, chip, i, gpio);
 		seq_puts(s, "\n");
@@ -734,15 +734,15 @@ static const struct gpio_chip msm_gpio_template = {
 	.direction_output = msm_gpio_direction_output,
 	.get_direction    = msm_gpio_get_direction,
 	.get              = msm_gpio_get,
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Fuchun.Liao@Mobile.BSP.CHG 2016-01-19 add for oppo vooc adapter update
 	.get_oppo_vooc	  = msm_gpio_get_oppo_vooc,
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 	.set              = msm_gpio_set,
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //Fuchun.Liao@Mobile.BSP.CHG 2016-01-19 add for oppo vooc adapter update
 	.set_oppo_vooc	  = msm_gpio_set_oppo_vooc,
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 	.request          = gpiochip_generic_request,
 	.free             = gpiochip_generic_free,
 	.dbg_show         = msm_gpio_dbg_show,

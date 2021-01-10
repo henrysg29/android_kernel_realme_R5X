@@ -53,7 +53,7 @@
 #define SENSOR_PROBE_WRITE
 
 #define SECURE_CAMERA
-/*#ifdev VENDOR_EDIT   shubham.makrariya@camera adding camera id 4*/
+/*#ifdev CONFIG_PRODUCT_REALME_TRINKET   shubham.makrariya@camera adding camera id 4*/
 
 #define SECURE_CAM_RST_MODULES
 

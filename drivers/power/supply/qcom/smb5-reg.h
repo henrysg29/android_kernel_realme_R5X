@@ -103,7 +103,7 @@ enum {
 
 #define JEITA_EN_CFG_REG			(CHGR_BASE + 0x90)
 
-#ifdef VENDOR_EDIT /*zhangkun@BSP.CHG.Basic, 2019/03/230 Add for disable JEITA*/
+#ifdef CONFIG_PRODUCT_REALME_TRINKET /*zhangkun@BSP.CHG.Basic, 2019/03/230 Add for disable JEITA*/
 #define JEITA_EN_HARDLIMIT_BIT	BIT(4) 
 #endif
 
@@ -152,7 +152,7 @@ enum {
 
 #define DCDC_OTG_CURRENT_LIMIT_CFG_REG		(DCDC_BASE + 0x52)
 
-#ifdef VENDOR_EDIT /*zhangkun@BSP.CHG.Basic, 2019/04/27 Add for disable JEITA*/
+#ifdef CONFIG_PRODUCT_REALME_TRINKET /*zhangkun@BSP.CHG.Basic, 2019/04/27 Add for disable JEITA*/
 #define DCDC_OTG_CURRENT_LIMIT_1000MA_BIT      BIT(2) 
 #endif
 
@@ -188,10 +188,10 @@ enum {
 #define SHIP_MODE_EN_BIT			BIT(0)
 
 #define BATIF_ADC_CHANNEL_EN_REG		(BATIF_BASE + 0x82)
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190613, Modify for reduce usbin-ov */
 #define IBATT_CHANNEL_EN_BIT			BIT(6)
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 #define CONN_THM_CHANNEL_EN_BIT			BIT(4)
 #define DIE_TEMP_CHANNEL_EN_BIT			BIT(2)
 #define MISC_THM_CHANNEL_EN_BIT			BIT(1)
@@ -530,11 +530,11 @@ enum {
 
 #define AICL_RERUN_TIME_CFG_REG			(MISC_BASE + 0x61)
 #define AICL_RERUN_TIME_12S_VAL			0x01
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190516, Add for usb icl rerun timer */
 #define AICL_RERUN_TIME_45S_VAL			0x02
 #define AICL_RERUN_TIME_180S_VAL		0x03
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 #define MISC_THERMREG_SRC_CFG_REG		(MISC_BASE + 0x70)
 #define THERMREG_SW_ICL_ADJUST_BIT		BIT(7)

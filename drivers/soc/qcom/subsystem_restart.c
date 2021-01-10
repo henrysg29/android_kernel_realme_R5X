@@ -40,7 +40,7 @@
 #include <linux/of.h>
 #include <asm/current.h>
 #include <linux/timer.h>
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #include <wt_sys/wt_boot_reason.h>
 #endif
@@ -1249,7 +1249,7 @@ int subsystem_restart_dev(struct subsys_device *dev)
 
 	name = dev->desc->name;
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 	if (dev->restart_level == RESET_SOC) {
@@ -1850,7 +1850,7 @@ struct subsys_device *subsys_register(struct subsys_desc *desc)
 	subsys->notif_state = -1;
 	subsys->desc->sysmon_pid = -1;
 	subsys->desc->state = NULL;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 	/*YiXue.Ge@PSW.BSP.Kernel.Driver,2017/05/15,
 	 * Add for init subsyst restart level as RESET_SUBSYS_COUPLED at mp build
 	 */

@@ -2186,7 +2186,7 @@ static void msm_isp_enqueue_tasklet_cmd(struct vfe_device *vfe_dev,
 		MSM_VFE_TASKLETQ_SIZE;
 	list_add_tail(&queue_cmd->list, &tasklet->tasklet_q);
 	spin_unlock_irqrestore(&tasklet->tasklet_lock, flags);
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	/*Shengqian.Chen@ODM_WT.Camera.HAL, 1372106, 20190724, stability modify for bokeh preview hang issue*/
 	tasklet_hi_schedule(&tasklet->tasklet);
 	#else

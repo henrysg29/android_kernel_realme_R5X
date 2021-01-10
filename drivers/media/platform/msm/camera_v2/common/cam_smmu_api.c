@@ -1021,7 +1021,7 @@ static int cam_smmu_map_buffer_and_add_to_list(int idx, int ion_fd,
 		pr_err("Error: dma buf attach failed\n");
 		goto err_put;
 	}
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	/*Added by tao.Li@ODM_WT.Camera.Driver.2171012 20190801 for special huajiao app*/
 	/* cache flush/invalidation is done by buffer provider */
 	attach->dma_map_attrs |= DMA_ATTR_SKIP_CPU_SYNC;
@@ -1107,7 +1107,7 @@ static int cam_smmu_unmap_buf_and_remove_from_list(
 			(void *)mapping_info->attach);
 		return -EINVAL;
 	}
-	#ifdef ODM_WT_EDIT
+	#ifdef CONFIG_ODM_WT_EDIT
 	/*Added by tao.Li@ODM_WT.Camera.Driver.2171012 20190801 for special huajiao app*/
 	/* skip cache operations */
 	mapping_info->attach->dma_map_attrs |= DMA_ATTR_SKIP_CPU_SYNC;

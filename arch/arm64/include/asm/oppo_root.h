@@ -1,4 +1,4 @@
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 //wangzhenhua@Plf.Framework,2017/10/09, modify for oppo root check
 #ifndef __ARCH_ARM64_OPPO_ROOT_H_
 #define __ARCH_ARM64_OPPO_ROOT_H_
@@ -18,5 +18,5 @@
 #define __NR_setresgid 		149
 
 #endif
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 

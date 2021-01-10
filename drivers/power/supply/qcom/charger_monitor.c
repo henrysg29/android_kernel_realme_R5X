@@ -1,6 +1,6 @@
 /*******************************************************************************
  *  Copyright (C), 2008-2018, OPPO Mobile Comm Corp., Ltd.
- *  ODM_WT_EDIT
+ *  CONFIG_ODM_WT_EDIT
  *  FILE: - charger_monitor.c
  *  Description : Add charger monitor function
  *  Version: 1.0
@@ -11,7 +11,7 @@
  *   <author>	 <data> 	<version >			<desc>
  *  Bin2.Zhang	2018/6/20	1.0				Add charger monitor function
  ******************************************************************************/
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1372106, 20180620, Add for charger monitor */
 //#define DEBUG
 #define pr_fmt(fmt) "CHG-CHK: " fmt
@@ -1897,4 +1897,4 @@ int deinit_chg_monitor_work(struct smb_charger *chg)
 
 	return 0;
 }
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */

@@ -47,7 +47,7 @@
 #include <linux/bug.h>
 #include <linux/sched.h>
 #include <linux/rculist.h>
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #include <wt_sys/wt_boot_reason.h>
 #endif
@@ -196,7 +196,7 @@ enum bug_trap_type report_bug(unsigned long bugaddr, struct pt_regs *regs)
 
 	if (file) {
 		pr_crit("kernel BUG at %s:%u!\n", file, line);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 		save_panic_key_log("kernel BUG at %s:%u!\n", file, line);
@@ -205,7 +205,7 @@ enum bug_trap_type report_bug(unsigned long bugaddr, struct pt_regs *regs)
 	} else {
 		pr_crit("Kernel BUG at %p [verbose debug info unavailable]\n",
 			(void *)bugaddr);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 		save_panic_key_log("Kernel BUG at %p \n", (void *)bugaddr);

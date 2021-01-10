@@ -1971,7 +1971,7 @@ struct qcom_glink *qcom_glink_native_probe(struct device *dev,
 
 	irq = of_irq_get(dev->of_node, 0);
 //yangmingjin@BSP.POWER.Basic 2019/06/27 add for RM_TAG_POWER_DEBUG
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_PRODUCT_REALME_TRINKET
 	ret = devm_request_irq(dev, irq,
 			       qcom_glink_native_intr,
 			       IRQF_NO_SUSPEND | IRQF_SHARED,
@@ -1982,7 +1982,7 @@ struct qcom_glink *qcom_glink_native_probe(struct device *dev,
 			       IRQF_NO_SUSPEND | IRQF_SHARED,
 			       glink->name, glink);
 #endif
-/*VENDOR_EDIT*/
+/*CONFIG_PRODUCT_REALME_TRINKET*/
 	if (ret) {
 		dev_err(dev, "failed to request IRQ\n");
 		goto unregister;

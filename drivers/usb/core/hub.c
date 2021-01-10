@@ -4331,7 +4331,7 @@ static int hub_set_address(struct usb_device *udev, int devnum)
  * device says it supports the new USB 2.0 Link PM errata by setting the BESL
  * support bit in the BOS descriptor.
  */
-#ifndef ODM_WT_EDIT
+#ifndef CONFIG_ODM_WT_EDIT
 //Haibin1.Zhang@ODM_WT.BSP.Storage.USB, 2019/07/06, Modify for USB copy performanc
 static void hub_set_initial_usb2_lpm_policy(struct usb_device *udev)
 {
@@ -4703,7 +4703,7 @@ hub_port_init(struct usb_hub *hub, struct usb_device *udev, int port1,
 	/* notify HCD that we have a device connected and addressed */
 	if (hcd->driver->update_device)
 		hcd->driver->update_device(hcd, udev);
-	#ifndef ODM_WT_EDIT
+	#ifndef CONFIG_ODM_WT_EDIT
         //Haibin1.Zhang@ODM_WT.BSP.Storage.USB, 2019/07/06, Modify for USB copy performanc
         hub_set_initial_usb2_lpm_policy(udev);
         #endif

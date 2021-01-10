@@ -188,10 +188,10 @@ obj-$(CONFIG_NETFILTER_XT_MATCH_STRING) += xt_string.o
 obj-$(CONFIG_NETFILTER_XT_MATCH_TCPMSS) += xt_tcpmss.o
 obj-$(CONFIG_NETFILTER_XT_MATCH_TIME) += xt_time.o
 obj-$(CONFIG_NETFILTER_XT_MATCH_U32) += xt_u32.o
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 #Ji.Xu@BSP.Power.Basic 2019/04/03 add for backup of netstat before sleep
 obj-$(CONFIG_XT_QTAGUID_OPPO_STATS) += xt_qtaguid_oppo_stats.o
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_PRODUCT_REALME_TRINKET */
 
 # ipset
 obj-$(CONFIG_IP_SET) += ipset/

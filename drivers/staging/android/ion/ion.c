@@ -44,11 +44,11 @@
 #include <trace/events/ion.h>
 #include <soc/qcom/secure_buffer.h>
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 // wenbin.liu@PSW.BSP.MM, 2018/07/11
 // Add for ion used cnt
 #include <linux/module.h>
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 #include "ion.h"
 #include "ion_secure_util.h"
@@ -109,7 +109,7 @@ static void ion_buffer_add(struct ion_device *dev,
 	rb_insert_color(&buffer->node, &dev->buffers);
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Huacai.Zhou@PSW.BSP.Kernel.MM, 2018-06-26, add ion total used account*/
 static atomic_long_t ion_total_size;
 static bool ion_cnt_enable = true;
@@ -119,7 +119,7 @@ unsigned long ion_total(void)
 		return 0;
 	return (unsigned long)atomic_long_read(&ion_total_size);
 }
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 
 /* this function should only be called while dev->lock is held */
 static struct ion_buffer *ion_buffer_create(struct ion_heap *heap,
@@ -190,7 +190,7 @@ static struct ion_buffer *ion_buffer_create(struct ion_heap *heap,
 	ion_buffer_add(dev, buffer);
 	mutex_unlock(&dev->buffer_lock);
 	atomic_long_add(len, &heap->total_allocated);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Huacai.Zhou@PSW.BSP.Kernel.MM, 2018-06-26, add ion total used account*/
 	if (ion_cnt_enable)
 		atomic_long_add(buffer->size, &ion_total_size);
@@ -210,11 +210,11 @@ void ion_buffer_destroy(struct ion_buffer *buffer)
 		pr_warn_ratelimited("ION client likely missing a call to dma_buf_kunmap or dma_buf_vunmap\n");
 		buffer->heap->ops->unmap_kernel(buffer->heap, buffer);
 	}
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_PRODUCT_REALME_TRINKET
 /* Huacai.Zhou@PSW.BSP.Kernel.MM, 2018-06-26, add ion total used account*/
 	if (ion_cnt_enable)
 		atomic_long_sub(buffer->size, &ion_total_size);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_PRODUCT_REALME_TRINKET*/
 	buffer->heap->ops->free(buffer);
 	kfree(buffer);
 }

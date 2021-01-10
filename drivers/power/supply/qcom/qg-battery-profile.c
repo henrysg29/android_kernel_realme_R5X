@@ -427,7 +427,7 @@ int qg_get_nominal_capacity(u32 *nom_cap_uah, int batt_temp, bool charging)
 	return 0;
 }
 
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 /* Bin2.Zhang@ODM_WT.BSP.Charger.Basic.1941873, 20190416, Add for store SOC */
 int lookup_ocv_soc(u32 *ocv_uv, u32 soc, int batt_temp, bool charging)
 {
@@ -445,7 +445,7 @@ int lookup_ocv_soc(u32 *ocv_uv, u32 soc, int batt_temp, bool charging)
 
 	return 0;
 }
-#endif /* ODM_WT_EDIT */
+#endif /* CONFIG_ODM_WT_EDIT */
 
 int qg_batterydata_init(struct device_node *profile_node)
 {

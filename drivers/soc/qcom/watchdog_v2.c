@@ -35,7 +35,7 @@
 #include <linux/sched/clock.h>
 #include <linux/cpumask.h>
 #include <uapi/linux/sched/types.h>
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #include <wt_sys/wt_boot_reason.h>
 #endif
@@ -537,7 +537,7 @@ static irqreturn_t wdog_bark_handler(int irq, void *dev_id)
 	nanosec_rem = do_div(t, 1000000000);
 	dev_info(wdog_dd->dev, "Watchdog bark! Now = %lu.%06lu\n",
 			(unsigned long) t, nanosec_rem / 1000);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 	save_panic_key_log("Watchdog bark! Now = %lu.%06lu\n",
@@ -548,7 +548,7 @@ static irqreturn_t wdog_bark_handler(int irq, void *dev_id)
 	nanosec_rem = do_div(wdog_dd->last_pet, 1000000000);
 	dev_info(wdog_dd->dev, "Watchdog last pet at %lu.%06lu\n",
 			(unsigned long) wdog_dd->last_pet, nanosec_rem / 1000);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 	save_panic_key_log("Watchdog last pet at %lu.%06lu\n",
@@ -557,7 +557,7 @@ static irqreturn_t wdog_bark_handler(int irq, void *dev_id)
 #endif
 	if (wdog_dd->do_ipi_ping)
 		dump_cpu_alive_mask(wdog_dd);
-#ifdef ODM_WT_EDIT
+#ifdef CONFIG_ODM_WT_EDIT
 // Hui.Wang@ODM_WT.BSP.Kernel.Stability.1941873, 2019/05/31, Add for display boot reason
 #ifdef CONFIG_WT_BOOT_REASON
 	set_reset_magic(RESET_MAGIC_WDT_BARK);

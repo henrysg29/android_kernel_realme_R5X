@@ -1,38 +1,36 @@
 # SPDX-License-Identifier: GPL-2.0
-# ifndef VENDOR_EDIT Yunqing.Zeng@BSP.Kernel.Driver 2019/03/15 Modify for use oppo target dts for kernel
-#dts-dirs += actions
-#dts-dirs += al
-#dts-dirs += allwinner
-#dts-dirs += altera
-#dts-dirs += amd
-#dts-dirs += amlogic
-#dts-dirs += apm
-#dts-dirs += arm
-#dts-dirs += broadcom
-#dts-dirs += cavium
-#dts-dirs += exynos
-#dts-dirs += freescale
-#dts-dirs += hisilicon
-#dts-dirs += marvell
-#dts-dirs += mediatek
-#dts-dirs += nvidia
-#dts-dirs += qcom
-#dts-dirs += realtek
-#dts-dirs += renesas
-#dts-dirs += rockchip
-#dts-dirs += socionext
-#dts-dirs += sprd
-#dts-dirs += xilinx
-#dts-dirs += lg
-#dts-dirs += zte
-# else
-# ifndef VENDOR_EDIT Hanqing.Wang@BSP.Kernel.Driver 2019/03/23 Modify for use 19631 target dts for kernel
+ifneq ($(CONFIG_PRODUCT_REALME_TRINKET),y)
+dts-dirs += actions
+dts-dirs += al
+dts-dirs += allwinner
+dts-dirs += altera
+dts-dirs += amd
+dts-dirs += amlogic
+dts-dirs += apm
+dts-dirs += arm
+dts-dirs += broadcom
+dts-dirs += cavium
+dts-dirs += exynos
+dts-dirs += freescale
+dts-dirs += hisilicon
+dts-dirs += marvell
+dts-dirs += mediatek
+dts-dirs += nvidia
+dts-dirs += qcom
+dts-dirs += realtek
+dts-dirs += renesas
+dts-dirs += rockchip
+dts-dirs += socionext
+dts-dirs += sprd
+dts-dirs += xilinx
+dts-dirs += lg
+dts-dirs += zte
+else
 dts-dirs += 19631
 dts-dirs += 19632
 dts-dirs += 19633
 dts-dirs += 19743
-# endif Hanqing.Wang@BSP.Kernel.Driver 2019/03/23 Modify for use 19631 target dts for kernel
-# endif
+endif
 
 subdir-y	:= $(dts-dirs)
 
