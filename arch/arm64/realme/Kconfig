@@ -1,0 +1,8 @@
+menu "Realme product selection"
+
+config PRODUCT_REALME_TRINKET
+	bool "Realme Trinket devices"
+	help
+	  This enables support for Realme Trinket devices.
+
+endmenu
