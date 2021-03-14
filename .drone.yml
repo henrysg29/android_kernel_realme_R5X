@@ -14,6 +14,7 @@ steps:
         from_secret: CHAT_ID
       KERNAME:
         from_secret: KERNEL_NAME
+      DEFCONFIG: vendor/r5x_defconfig
     image: fadlyas/kernel_dockerfile:latest
     name: Build & Upload
     trigger: 
