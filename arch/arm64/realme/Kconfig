@@ -5,4 +5,16 @@ config PRODUCT_REALME_TRINKET
 	help
 	  This enables support for Realme Trinket devices.
 
+config PRODUCT_REALME_RMX1911
+	bool "Realme 5 Series"
+	select PRODUCT_REALME_TRINKET
+	help
+	  This enables support for Realme 5 Series.
+
+config PRODUCT_REALME_RMX2030
+	bool "Realme 5i"
+	select PRODUCT_REALME_TRINKET
+	help
+	  This enables support for Realme 5i.
+
 endmenu
