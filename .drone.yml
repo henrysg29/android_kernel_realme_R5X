@@ -2,7 +2,7 @@
 clone: 
   depth: 1
 kind: pipeline
-name: IrawansCI
+name: RMX1911
 steps: 
   - 
     commands: 
@@ -14,7 +14,33 @@ steps:
         from_secret: CHAT_ID
       KERNAME:
         from_secret: KERNEL_NAME
-      DEFCONFIG: vendor/r5x_defconfig
+      DEFCONFIG: vendor/RMX1911_defconfig
+      DEVICE: RMX1911
+      SUPPORTED: 5, 5s, 5 NFC
+    image: fadlyas/kernel_dockerfile:latest
+    name: Build & Upload
+    trigger: 
+      branch: 
+        - P-rom_builder
+--- 
+clone: 
+  depth: 1
+kind: pipeline
+name: RMX2030
+steps: 
+  - 
+    commands: 
+      - "curl https://gitlab.com/dodyirawan85/scripts/raw/master/r5x-kernel-on-docker.sh | bash"
+    environment: 
+      TELEGRAM_TOKEN: 
+        from_secret: BOT_API_KEY
+      CHAT_ID:
+        from_secret: CHAT_ID
+      KERNAME:
+        from_secret: KERNEL_NAME
+      DEFCONFIG: vendor/RMX2030_defconfig
+      DEVICE: RMX2030
+      SUPPORTED: 5i
     image: fadlyas/kernel_dockerfile:latest
     name: Build & Upload
     trigger: 
