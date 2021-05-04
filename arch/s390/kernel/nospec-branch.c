@@ -57,6 +57,15 @@ early_param("nospectre_v2", nospectre_v2_setup_early);
 
 void __init nospec_auto_detect(void)
 {
+	if (cpu_mitigations_off()) {
+		/*
+		 * Disable expolines and disable nobp.
+		 */
+		if (IS_ENABLED(CC_USING_EXPOLINE))
+			nospec_disable = 1;
+		__clear_facility(82, S390_lowcore.alt_stfle_fac_list);
+	}
+
 	if (IS_ENABLED(CC_USING_EXPOLINE)) {
 		/*
 		 * The kernel has been compiled with expolines.
