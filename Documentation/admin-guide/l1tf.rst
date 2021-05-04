@@ -445,7 +445,6 @@ The default is 'cond'. If 'l1tf=full,force' is given on the kernel command
 line, then 'always' is enforced and the kvm-intel.vmentry_l1d_flush
 module parameter is ignored and writes to the sysfs file are rejected.
 
-.. _mitigation_selection:
 
 Mitigation selection guide
 --------------------------
@@ -557,7 +556,7 @@ When nested virtualization is in use, three operating systems are involved:
 the bare metal hypervisor, the nested hypervisor and the nested virtual
 machine.  VMENTER operations from the nested hypervisor into the nested
 guest will always be processed by the bare metal hypervisor. If KVM is the
-bare metal hypervisor it will:
+bare metal hypervisor it wiil:
 
  - Flush the L1D cache on every switch from the nested hypervisor to the
    nested virtual machine, so that the nested hypervisor's secrets are not
