@@ -865,6 +865,7 @@ static int __iommu_mmap_attrs(struct device *dev, struct vm_area_struct *vma,
 		 */
 		pfn = vmalloc_to_pfn(cpu_addr);
 
+	}
 	if (pfn)
 		return __swiotlb_mmap_pfn(vma, pfn, size);
 
@@ -873,10 +874,9 @@ static int __iommu_mmap_attrs(struct device *dev, struct vm_area_struct *vma,
 
 static int __iommu_get_sgtable(struct device *dev, struct sg_table *sgt,
 			       void *cpu_addr, dma_addr_t dma_addr,
-			       size_t size, unsigned long attrs)
+			       size_t size, unsigned long attrs) 
 {
 	unsigned int count = PAGE_ALIGN(size) >> PAGE_SHIFT;
-	struct page *page = NULL;
 	struct vm_struct *area = find_vm_area(cpu_addr);
 
 	if (!is_vmalloc_addr(cpu_addr)) {
@@ -889,11 +889,14 @@ static int __iommu_get_sgtable(struct device *dev, struct sg_table *sgt,
 		 * DMA_ATTR_FORCE_CONTIGUOUS and atomic pool allocations
 		 * are always remapped, hence in the vmalloc space.
 		 */
-		page = vmalloc_to_page(cpu_addr);
-
-	if (page)
+		struct page *page = vmalloc_to_page(cpu_addr);
 		return __swiotlb_get_sgtable_page(sgt, page, size);
+	}
+	if (WARN_ON(!area || !area->pages))
 	return -ENXIO;
+
+	return sg_alloc_table_from_pages(sgt, area->pages, count, 0, size,
+					 GFP_KERNEL);
 }
 
 static void __iommu_sync_single_for_cpu(struct device *dev,
