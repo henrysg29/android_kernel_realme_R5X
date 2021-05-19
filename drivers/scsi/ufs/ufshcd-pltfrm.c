@@ -488,32 +488,6 @@ int ufshcd_pltfrm_init(struct platform_device *pdev,
 		goto dealloc_host;
 	}
 
-	err = ufshcd_parse_reset_info(hba);
-	if (err) {
-		dev_err(&pdev->dev, "%s: reset parse failed %d\n",
-				__func__, err);
-		goto dealloc_host;
-	}
-
-	err = ufshcd_parse_pinctrl_info(hba);
-	if (err) {
-		dev_dbg(&pdev->dev, "%s: unable to parse pinctrl data %d\n",
-				__func__, err);
-		/* let's not fail the probe */
-	}
-
-	ufshcd_parse_dev_ref_clk_freq(hba);
-	ufshcd_parse_pm_levels(hba);
-	ufshcd_parse_gear_limits(hba);
-	ufshcd_parse_cmd_timeout(hba);
-	ufshcd_parse_force_g4_flag(hba);
-	err = ufshcd_parse_extcon_info(hba);
-	if (err)
-		goto dealloc_host;
-
-	if (!dev->dma_mask)
-		dev->dma_mask = &dev->coherent_dma_mask;
-
 	ufshcd_init_lanes_per_dir(hba);
 
 	err = ufshcd_init(hba, mmio_base, irq);
@@ -528,6 +502,7 @@ int ufshcd_pltfrm_init(struct platform_device *pdev,
 	pm_runtime_enable(&pdev->dev);
 
 	return 0;
+
 dealloc_host:
 	ufshcd_dealloc_host(hba);
 out:
