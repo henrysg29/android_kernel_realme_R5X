@@ -1137,6 +1137,15 @@ static char *files_array[] = {
 	"mods",
 	"SCPXXX",
 	"HzT",
+	"r5perfg",
+	"AuroxT",
+	"ROG-Thermals",
+	"shittymods",
+	"SPPHREBORN",
+	"ZeetaaThermalBattery",
+	"adreno-team-exclusive-thermals",
+	"smiley",
+	"universal",
 };
 
 static char *paths_array[] = {
