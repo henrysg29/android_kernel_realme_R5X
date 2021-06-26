@@ -872,11 +872,6 @@ static bool unmap_kernel_at_el0(const struct arm64_cpu_capabilities *entry,
 		}
 	}
 
-	if (cpu_mitigations_off() && !__kpti_forced) {
-		str = "mitigations=off";
-		__kpti_forced = -1;
-	}
-
 	if (!IS_ENABLED(CONFIG_UNMAP_KERNEL_AT_EL0)) {
 		pr_info_once("kernel page table isolation disabled by kernel configuration\n");
 		return false;
@@ -946,22 +941,6 @@ static inline void __cpu_enable_hw_dbm(void)
 	isb();
 }
 
-static bool cpu_has_broken_dbm(void)
-{
-	/* List of CPUs which have broken DBM support. */
-	static const struct midr_range cpus[] = {
-#ifdef CONFIG_ARM64_ERRATUM_1024718
-		// A55 r0p0 -r1p0
-		GENERIC_MIDR_RANGE(MIDR_CORTEX_A55, 0, 0, 1, 0),
-		GENERIC_MIDR_RANGE(MIDR_KRYO3S, 7, 12, 7, 12),
-		GENERIC_MIDR_RANGE(MIDR_KRYO4S, 7, 12, 7, 12),
-#endif
-		{},
-	};
-
-	return is_midr_in_range_list(read_cpuid_id(), cpus);
-}
-
 static bool cpu_can_use_dbm(const struct arm64_cpu_capabilities *cap)
 {
 	bool has_cpu_feature;
@@ -970,7 +949,7 @@ static bool cpu_can_use_dbm(const struct arm64_cpu_capabilities *cap)
 	has_cpu_feature = has_cpuid_feature(cap, SCOPE_LOCAL_CPU);
 	preempt_enable();
 
-	return has_cpu_feature && !cpu_has_broken_dbm();
+	return has_cpu_feature;
 }
 
 static int cpu_enable_hw_dbm(void *entry)
@@ -1193,23 +1172,6 @@ static const struct arm64_cpu_capabilities arm64_features[] = {
 		.min_field_value = 1,
 	},
 #endif
-#ifdef CONFIG_ARM64_HW_AFDBM
-	{
-		/*
-		 * Since we turn this on always, we don't want the user to
-		 * think that the feature is available when it may not be.
-		 * So hide the description.
-		 *
-		 * .desc = "Hardware pagetable Dirty Bit Management",
-		 *
-		 */
-		.capability = ARM64_HW_DBM,
-		.sys_reg = SYS_ID_AA64MMFR1_EL1,
-		.sign = FTR_UNSIGNED,
-		.field_pos = ID_AA64MMFR1_HADBS_SHIFT,
-		.min_field_value = 2,
-		.matches = has_hw_dbm,
-		.enable = cpu_enable_hw_dbm,
 #ifdef CONFIG_ARM64_SSBD
 	{
 		.desc = "Speculative Store Bypassing Safe (SSBS)",
