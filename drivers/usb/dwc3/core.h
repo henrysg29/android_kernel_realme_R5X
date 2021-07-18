@@ -970,16 +970,7 @@ struct dwc3_scratchpad_array {
  * 	1	- -3.5dB de-emphasis
  * 	2	- No de-emphasis
  * 	3	- Reserved
- * @err_evt_seen: previous event in queue was erratic error
- * @usb3_u1u2_disable: if true, disable U1U2 low power modes in Superspeed mode
- * @in_lpm: indicates if controller is in low power mode (no clocks)
- * @irq: irq number
- * @irq_cnt: total irq count
- * @bh_completion_time: time taken for IRQ bottom-half completion
- * @bh_handled_evt_cnt: no. of events handled per IRQ bottom-half
- * @irq_dbg_index: index for capturing IRQ stats
- * @wait_linkstate: waitqueue for waiting LINK to move into required state
- * @vbus_draw: current to be drawn from USB
+ * @dis_metastability_quirk: set to disable metastability quirk.
  * @imod_interval: set the interrupt moderation interval in 250ns
  *                 increments or 0 to disable.
  * @index: dwc3's instance number
@@ -1170,6 +1161,8 @@ struct dwc3 {
 	atomic_t		in_lpm;
 	bool			b_suspend;
 	unsigned int		vbus_draw;
+
+	unsigned		dis_metastability_quirk:1;
 
 	u16			imod_interval;
 	struct workqueue_struct *dwc_wq;
