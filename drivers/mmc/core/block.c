@@ -1069,7 +1069,6 @@ static int mmc_blk_ioctl_rpmb_cmd(struct block_device *bdev,
 			}
 		}
 
-	if (idata->rpmb) {
 		/*
 		 * Ensure RPMB command has completed by polling CMD13
 		 * "Send Status".
