@@ -499,28 +499,6 @@ static int xhci_plat_resume(struct device *dev)
 }
 #endif
 
-static int __maybe_unused xhci_plat_runtime_idle(struct device *dev)
-{
-	/*
-	 * When pm_runtime_put_autosuspend() is called on this device,
-	 * after this idle callback returns the PM core will schedule the
-	 * autosuspend if there is any remaining time until expiry. However,
-	 * when reaching this point because the child_count becomes 0, the
-	 * core does not honor autosuspend in that case and results in
-	 * idle/suspend happening immediately. In order to have a delay
-	 * before suspend we have to call pm_runtime_autosuspend() manually.
-	 */
-
-	pm_runtime_mark_last_busy(dev);
-	pm_runtime_autosuspend(dev);
-	return -EBUSY;
-
-	return 0;
-
-	return xhci_resume(xhci, 0);
-
-}
-
 static int __maybe_unused xhci_plat_runtime_suspend(struct device *dev)
 {
 	struct usb_hcd  *hcd = dev_get_drvdata(dev);
@@ -560,7 +538,7 @@ static const struct dev_pm_ops xhci_plat_pm_ops = {
 
 	SET_RUNTIME_PM_OPS(xhci_plat_runtime_suspend,
 			   xhci_plat_runtime_resume,
-			   xhci_plat_runtime_idle)
+			   NULL)
 };
 
 static const struct acpi_device_id usb_xhci_acpi_match[] = {
