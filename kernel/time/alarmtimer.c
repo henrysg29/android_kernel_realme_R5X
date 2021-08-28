@@ -148,7 +148,6 @@ static void alarmtimer_rtc_remove_device(struct device *dev,
 		rtc_irq_unregister(rtcdev, &alarmtimer_rtc_task);
 		rtcdev = NULL;
 	}
-	return ret;
 }
 
 static inline void alarmtimer_rtc_timer_init(void)
