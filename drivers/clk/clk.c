@@ -3323,6 +3323,7 @@ static int clk_debug_create_one(struct clk_core *core, struct dentry *pdentry)
 
 	d = debugfs_create_u32("clk_phase", 0444, core->dentry,
 			(u32 *)&core->phase);
+
 	if (!d)
 		goto err_out;
 
@@ -3338,11 +3339,13 @@ static int clk_debug_create_one(struct clk_core *core, struct dentry *pdentry)
 
 	d = debugfs_create_file("clk_enable_count", 0444, core->dentry,
 			core, &clock_enable_fops);
+
 	if (!d)
 		goto err_out;
 
 	d = debugfs_create_u32("clk_notifier_count", 0444, core->dentry,
-			(u32 *)&core->notifier_count);
+			       &core->notifier_count);
+
 	if (!d)
 		goto err_out;
 

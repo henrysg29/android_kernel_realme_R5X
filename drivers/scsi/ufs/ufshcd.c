@@ -2179,7 +2179,6 @@ start:
 				hba->clk_gating.active_reqs--;
 				break;
 			}
-
 			spin_unlock_irqrestore(hba->host->host_lock, flags);
 			flush_work(&hba->clk_gating.ungate_work);
 			spin_lock_irqsave(hba->host->host_lock, flags);
@@ -7459,18 +7458,13 @@ static irqreturn_t ufshcd_intr(int irq, void *__hba)
 			intr_status & ufshcd_readl(hba, REG_INTERRUPT_ENABLE);
 		if (intr_status)
 			ufshcd_writel(hba, intr_status, REG_INTERRUPT_STATUS);
-		if (enabled_intr_status)
-			retval |= ufshcd_sl_intr(hba, enabled_intr_status);
+		if (enabled_intr_status) {
+			ufshcd_sl_intr(hba, enabled_intr_status);
+			retval = IRQ_HANDLED;
+		}
 
 		intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
 	} while (intr_status && --retries);
-
-	if (retval == IRQ_NONE) {
-		dev_err(hba->dev, "%s: Unhandled interrupt 0x%08x\n",
-					__func__, intr_status);
-		ufshcd_hex_dump(hba, "host regs: ", hba->mmio_base,
-					UFSHCI_REG_SPACE_SIZE);
-	}
 
 	spin_unlock(hba->host->host_lock);
 	return retval;
