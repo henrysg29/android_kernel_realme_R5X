@@ -516,6 +516,9 @@ static int __maybe_unused xhci_plat_runtime_idle(struct device *dev)
 	return -EBUSY;
 
 	return 0;
+
+	return xhci_resume(xhci, 0);
+
 }
 
 static int __maybe_unused xhci_plat_runtime_suspend(struct device *dev)
