@@ -2730,13 +2730,13 @@ static int wp_page_copy(struct vm_fault *vmf)
 	int ret = VM_FAULT_OOM;
 
 	if (unlikely(anon_vma_prepare(vma)))
-		goto out;
+		goto oom;
 
 	if (is_zero_pfn(pte_pfn(vmf->orig_pte))) {
 		new_page = alloc_zeroed_user_highpage_movable(vma,
 							      vmf->address);
 		if (!new_page)
-			goto out;
+			goto oom;
 	} else {
 		new_page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma,
 				vmf->address);
@@ -2857,10 +2857,10 @@ out_uncharge:
 	mem_cgroup_cancel_charge(new_page, memcg, false);
 out_free_new:
 	put_page(new_page);
-out:
+oom:
 	if (old_page)
 		put_page(old_page);
-	return ret;
+	return VM_FAULT_OOM;
 }
 
 /**
