@@ -5,6 +5,8 @@
 #define STM_FLAG_NONE          0x00
 #define STM_FLAG_TIMESTAMPED   0x08
 #define STM_FLAG_GUARANTEED    0x80
+#include <linux/const.h>
+
 
 #define        OST_ENTITY_NONE                 0x00
 #define        OST_ENTITY_FTRACE_EVENTS        0x01
