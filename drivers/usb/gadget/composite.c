@@ -576,6 +576,10 @@ static u8 encode_bMaxPower(enum usb_device_speed speed,
 		/* only SuperSpeed and faster support > 500mA */
 		return DIV_ROUND_UP(min(val, 500U), 2);
 	}
+	if (speed < USB_SPEED_SUPER)
+		return DIV_ROUND_UP(val, 2);
+	else
+		return DIV_ROUND_UP(val, 8);
 }
 
 static int config_buf(struct usb_configuration *config,
