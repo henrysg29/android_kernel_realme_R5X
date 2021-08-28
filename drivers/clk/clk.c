@@ -43,7 +43,6 @@ static HLIST_HEAD(clk_root_list);
 static HLIST_HEAD(clk_orphan_list);
 static LIST_HEAD(clk_notifier_list);
 
-<<<<<<< HEAD
 struct clk_handoff_vdd {
 	struct list_head list;
 	struct clk_vdd_class *vdd_class;
@@ -61,7 +60,6 @@ static DEFINE_MUTEX(vdd_class_list_lock);
  * returning from clk_core_set_rate_nolock().
  */
 static LIST_HEAD(clk_rate_change_list);
-=======
 static struct hlist_head *all_lists[] = {
 	&clk_root_list,
 	&clk_orphan_list,
@@ -72,7 +70,6 @@ static struct hlist_head *orphan_list[] = {
 	&clk_orphan_list,
 	NULL,
 };
->>>>>>> e761f59736bafbf095575565f82ef82652aca4ba
 
 /***    private data structures    ***/
 
@@ -2704,7 +2701,6 @@ static u32 debug_suspend;
 static DEFINE_MUTEX(clk_debug_lock);
 static HLIST_HEAD(clk_debug_list);
 
-<<<<<<< HEAD
 static struct hlist_head *all_lists[] = {
 	&clk_root_list,
 	&clk_orphan_list,
@@ -2766,8 +2762,6 @@ static const struct file_operations clk_state_fops = {
 	.release	= single_release,
 };
 
-=======
->>>>>>> e761f59736bafbf095575565f82ef82652aca4ba
 static void clk_summary_show_one(struct seq_file *s, struct clk_core *c,
 				 int level)
 {
